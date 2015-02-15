@@ -28,7 +28,8 @@ Extends your visual editor to include page builder capabilities
 
 = The Goal =
 
-The goal is to create a page builder that
+The goal is to create a page builder that:
+
 * Feels and acts *native* and part of WordPress
 * Leaves *most* of the content working fine event if the plugin is deactivated or deleted
 * Lazy, no settings pages specific for the plugin
