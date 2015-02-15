@@ -1,4 +1,4 @@
-=== Plugin Name ===
+=== Page Builder Sandwich ===
 Contributors: bfintal
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=D2MK28E7BDLHC
 Tags: page builder, builder, page, visual, editor, column, columns, shortcode, layout, table, nested, composer, build, post
