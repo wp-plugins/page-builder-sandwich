@@ -3,7 +3,7 @@
 * Plugin Name: Page Builder Sandwich
 * Plugin URI: https://github.com/gambitph/Page-Builder-Sandwich
 * Description: The native visual editor page builder. Empower your visual editor with drag and drop & column capabilities.
-* Version: 0.2
+* Version: 0.3
 * Author: Benjamin Intal - Gambit Technologies Inc
 * Author URI: http://gambit.ph
 * License: GPL2
@@ -12,7 +12,7 @@
 */
 
 // Used for tracking the version used
-defined( 'PBS_VERSION' ) or define( 'PBS_VERSION', '0.2' );
+defined( 'PBS_VERSION' ) or define( 'PBS_VERSION', '0.3' );
 
 
 /**
@@ -120,11 +120,6 @@ class GambitPBSandwich {
 	    if ( ! current_user_can( 'edit_posts' ) && ! current_user_can( 'edit_pages' ) ) {
 		    return;
 	    }
-	
-	    // verify the post type
-	    if( ! in_array( $typenow, array( 'post', 'page' ) ) ) {
-	        return;
-		}
 	
 	    // check if WYSIWYG is enabled
 	    if ( get_user_option( 'rich_editing' ) == 'true' ) {
