@@ -1,0 +1,33 @@
+/**
+ * Float the columns
+ */
+.pbsandwich_column > div > div {
+	float: left;
+}
+
+/**
+ * Clear the columns
+ */
+.pbsandwich_column {
+	clear: both;
+}
+
+/**
+ * Clear column floats
+ */
+.pbsandwich_column:after {
+	content: '';
+	clear: both;
+	display: block;
+}
+
+/**
+ * Responsive columns, shrink to a single column
+ */
+@media (max-width: 768px) {
+	.pbsandwich_column > div > div {
+		margin-right: 0 !important;
+		float: none !important;
+		width: auto !important;
+	}
+}
