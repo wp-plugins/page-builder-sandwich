@@ -3,7 +3,7 @@
 * Plugin Name: Page Builder Sandwich
 * Plugin URI: https://github.com/gambitph/Page-Builder-Sandwich
 * Description: The native visual editor page builder. Empower your visual editor with drag and drop & column capabilities.
-* Version: 0.3
+* Version: 0.4
 * Author: Benjamin Intal - Gambit Technologies Inc
 * Author URI: http://gambit.ph
 * License: GPL2
@@ -12,8 +12,12 @@
 */
 
 // Used for tracking the version used
-defined( 'PBS_VERSION' ) or define( 'PBS_VERSION', '0.3' );
+defined( 'PBS_VERSION' ) or define( 'PBS_VERSION', '0.4' );
 
+// Used for file includes
+defined( 'PBS_PATH' ) or define( 'PBS_PATH', trailingslashit( dirname( __FILE__ ) ) );
+
+require_once( PBS_PATH . 'lib/shortcode/jetpack-contact-form.php' );
 
 /**
  * PB Sandwich Class
@@ -37,6 +41,7 @@ class GambitPBSandwich {
 		add_action( 'wp_head', array( $this, 'renderColumnStyles' ) );
 		add_filter( 'tiny_mce_before_init', array( $this, 'addSandwichBootstrap' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'loadFrontendStyles' ) );
+		add_action( 'init', array( $this, 'loadShortcake' ) );
 	}
 
 	
@@ -70,7 +75,8 @@ class GambitPBSandwich {
 	 * @return	void
 	 */
 	public function columnButtonIcon() {
-	    wp_enqueue_style( 'pbsandwich-admin', plugins_url( 'css/column-admin.css', __FILE__ ) );
+	    wp_enqueue_style( 'pbsandwich-admin', plugins_url( 'css/admin.css', __FILE__ ) );
+	    wp_enqueue_script( 'pbsandwich-admin', plugins_url( 'js/min/admin-min.js', __FILE__ ), array( 'jquery' ), PBS_VERSION );
 	}
 	
 	
@@ -81,7 +87,7 @@ class GambitPBSandwich {
 	 * @return	An array of TinyMCE plugins
 	 */
 	public function addTinyMCEPlugin( $pluginArray ) {
-	    $pluginArray['pbsandwich_column'] = plugins_url( 'js/column-button.js', __FILE__ );
+	    $pluginArray['pbsandwich'] = plugins_url( 'js/min/editor-min.js', __FILE__ );
 	    return $pluginArray;
 	}
 	
@@ -105,6 +111,29 @@ class GambitPBSandwich {
 	 */
 	public function loadjQuerySortable() {
 		wp_enqueue_script( 'jquery-ui-sortable' );
+	}
+	
+	
+	/**
+	 * Loads Shortcake UI if not available
+	 *
+	 * @return	void
+	 */
+	public function loadShortcake() {
+		// Don't do anything when we're activating a plugin to prevent errors
+		// on redeclaring Shortcake classes
+		if ( is_admin() ) {
+			if ( ! empty( $_GET['action'] ) && ! empty( $_GET['plugin'] ) ) {
+			    if ( $_GET['action'] == 'activate' ) {
+			        return;
+			    }
+			}
+		}
+		
+		// Include Shortcake if we don't have it yet
+		if ( ! class_exists( 'Shortcode_UI' ) ) {
+			require_once( PBS_PATH . 'inc/shortcake/shortcode-ui.php' );
+		}
 	}
 	
 	
@@ -200,7 +229,7 @@ class GambitPBSandwich {
 		if ( ! function_exists( 'file_get_html' ) ) {
 			require_once( 'inc/simple_html_dom.php' );
 		}
-		wp_enqueue_style( 'pbsandwich_columns', plugins_url( 'css/columns.css', __FILE__ ) );
+		wp_enqueue_style( 'pbsandwich-frontend', plugins_url( 'css/frontend.css', __FILE__ ) );
 		
 		$columnStyles = '';
 	
