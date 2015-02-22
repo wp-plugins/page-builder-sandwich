@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: page builder, builder, page, visual, editor, column, columns, shortcode, layout, table, nested, composer, build, post
 Requires at least: 3.9
 Tested up to: 4.1.1
-Stable tag: 0.4
+Stable tag: 0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -122,6 +122,15 @@ Take a look at the [Page Builder Sandwich GitHub Repository](https://github.com/
 == Upgrade Notice ==
 
 == Changelog ==
+
+= 0.5 =
+
+* New shortcode: Toggle
+* Shortcodes with dependencies are now grayed out instead of hidden
+* Fixed bug where columns did not display side-by-side in some cases
+* Fixed bug introduced in v0.4 where views cannot be dragged and clone buttons were not appearing
+* Updated translations
+* Code cleanups
 
 = 0.4 =
 

@@ -3,7 +3,7 @@
 * Plugin Name: Page Builder Sandwich
 * Plugin URI: https://github.com/gambitph/Page-Builder-Sandwich
 * Description: The native visual editor page builder. Empower your visual editor with drag and drop & column capabilities.
-* Version: 0.4
+* Version: 0.5
 * Author: Benjamin Intal - Gambit Technologies Inc
 * Author URI: http://gambit.ph
 * License: GPL2
@@ -12,12 +12,16 @@
 */
 
 // Used for tracking the version used
-defined( 'PBS_VERSION' ) or define( 'PBS_VERSION', '0.4' );
+defined( 'PBS_VERSION' ) or define( 'PBS_VERSION', '0.5' );
 
 // Used for file includes
 defined( 'PBS_PATH' ) or define( 'PBS_PATH', trailingslashit( dirname( __FILE__ ) ) );
 
+require_once( PBS_PATH . 'lib/shortcode/hello-dolly.php' );
 require_once( PBS_PATH . 'lib/shortcode/jetpack-contact-form.php' );
+// require_once( PBS_PATH . 'lib/shortcode/jetpack-googlemaps.php' );
+require_once( PBS_PATH . 'lib/shortcode/toggle.php' );
+
 
 /**
  * PB Sandwich Class
@@ -40,7 +44,7 @@ class GambitPBSandwich {
 		add_action( 'save_post', array( $this, 'rememberColumnStyles' ), 10, 3 );
 		add_action( 'wp_head', array( $this, 'renderColumnStyles' ) );
 		add_filter( 'tiny_mce_before_init', array( $this, 'addSandwichBootstrap' ) );
-		add_action( 'wp_enqueue_scripts', array( $this, 'loadFrontendStyles' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'loadFrontendScripts' ) );
 		add_action( 'init', array( $this, 'loadShortcake' ) );
 	}
 
@@ -64,8 +68,10 @@ class GambitPBSandwich {
 	    add_editor_style( plugins_url( 'css/editor.css', __FILE__ ) );
 	}
 	
-	public function loadFrontendStyles() {
-	    wp_enqueue_style( 'pbsandwich-bootstrap', plugins_url( 'css/bootstrap-sandwich.css', __FILE__ ), array(), PBS_VERSION );
+	public function loadFrontendScripts() {
+		wp_enqueue_style( 'dashicons' );
+	    wp_enqueue_style( 'pbsandwich', plugins_url( 'css/frontend.css', __FILE__ ), array(), PBS_VERSION );
+	    wp_enqueue_script( 'pbsandwich', plugins_url( 'js/min/frontend-min.js', __FILE__ ), array( 'jquery' ), PBS_VERSION );
 	}
 
 	
@@ -370,6 +376,31 @@ class GambitPBSandwich {
 	public function addSandwichBootstrap( $init ) {
 		$init['body_class'] = 'sandwich';
 		return $init;
+	}
+	
+	public static function printDisabledShortcakeStlyes( $shortcode, $label ) {
+		?>
+		<style>
+		.add-shortcode-list .shortcode-list-item[data-shortcode="<?php echo $shortcode ?>"]:after {
+			content: "<?php echo addslashes( $label ) ?>";
+			top: 50%;
+			position: absolute;
+			text-align: center;
+			transform: translateY(-50%);
+			background: rgba(255,255,255,.8);
+			padding: .3em .5em;
+			font-style: italic;
+			left: 0;
+		}
+		.add-shortcode-list .shortcode-list-item[data-shortcode="<?php echo $shortcode ?>"] {
+			box-shadow: none;
+			pointer-events: none;
+		}
+		.add-shortcode-list .shortcode-list-item[data-shortcode="<?php echo $shortcode ?>"] > * {
+			opacity: .3;
+		}
+		</style>
+		<?php
 	}
 	
 }
