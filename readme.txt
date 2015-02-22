@@ -75,6 +75,7 @@ We support the following Jetpack shortcodes. To see these, install & activate Je
 
 Aside from the shortcodes and embeds listed above, we've included other shortcodes as well:
 
+* Toggle
 * *Still being created*
 
 *Contributions are welcome at the [Github repository](https://github.com/gambitph/Page-Builder-Sandwich/)*
@@ -127,8 +128,8 @@ Take a look at the [Page Builder Sandwich GitHub Repository](https://github.com/
 
 * New shortcode: Toggle
 * Shortcodes with dependencies are now grayed out instead of hidden
-* Fixed bug where columns did not display side-by-side in some cases
-* Fixed bug introduced in v0.4 where views cannot be dragged and clone buttons were not appearing
+* Fixed: columns did not display side-by-side in some cases
+* Fixed: bug introduced in v0.4 where views cannot be dragged and clone buttons were not appearing
 * Updated translations
 * Code cleanups
 
