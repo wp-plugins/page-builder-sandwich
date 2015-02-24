@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: page builder, builder, page, visual, editor, column, columns, shortcode, layout, table, nested, composer, build, post
 Requires at least: 3.9
 Tested up to: 4.1.1
-Stable tag: 0.6
+Stable tag: 0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -68,15 +68,28 @@ The goal is to create a page builder that:
 
 Shortcodes are added by clicking on **Add Media > Insert Post Element**.
 
-We support the following Jetpack shortcodes. To see these, install & activate Jetpack then make sure the corresponsing feature module is activated:
+We support the following shortcodes & widgets:
 
-* Contact Form
-* *Others are still being created*
-
-Aside from the shortcodes and embeds listed above, we've included other shortcodes as well:
-
-* Toggle
-* *Still being created*
+* Archives (Widget)
+* Calendar (Widget)
+* Categories (Widget)
+* Contact Form (Jetpack)
+* Custom Menu (Widget)
+* Display WordPress Posts (Jetpack)
+* Facebook Like Box (Jetpack)
+* Gravatar Profile (Jetpack)
+* Meta (Widget)
+* Pages (Widget)
+* Portfolio (Jetpack)
+* Recent Comments (Widget)
+* Recent Posts (Widget)
+* RSS (Widget)
+* RSS Links (Jetpack)
+* Search (Widget)
+* Subscribe (Jetpack)
+* Tag Cloud (Widget)
+* Toggle / FAQ
+* *More being created. Have a suggestion? [Let us know here](https://github.com/gambitph/Page-Builder-Sandwich/issues/new)*
 
 *Contributions are welcome at the [Github repository](https://github.com/gambitph/Page-Builder-Sandwich/)*
 
@@ -101,6 +114,7 @@ Report bugs and help out in the code from the [Github repository](https://github
 1. Drag and drop stuff
 2. You can do this while editing posts and pages
 3. You then get these columns as your output
+4. Shortcodes
 
 == Frequently Asked Questions ==
 
@@ -123,6 +137,26 @@ Take a look at the [Page Builder Sandwich GitHub Repository](https://github.com/
 == Upgrade Notice ==
 
 == Changelog ==
+
+= 0.7 =
+
+* Added a lot of shortcodes/widgets. All of these are accessible via Add Media > Insert Post Element
+	* Archives
+	* Calendar
+	* Categories
+	* Custom Menu
+	* Meta
+	* Pages
+	* Recent Comments
+	* Recent Posts
+	* RSS
+	* Search
+	* Tag Cloud
+	* Display WordPress Posts (Jetpack)
+	* Facebook Like Box (Jetpack)
+	* Gravatar Profile (Jetpack)
+	* RSS Links (Jetpack)
+	* Subscribe (Jetpack)
 
 = 0.6 =
 

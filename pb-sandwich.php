@@ -3,7 +3,7 @@
 * Plugin Name: Page Builder Sandwich
 * Plugin URI: https://github.com/gambitph/Page-Builder-Sandwich
 * Description: The native visual editor page builder. Empower your visual editor with drag and drop & column capabilities.
-* Version: 0.6
+* Version: 0.7
 * Author: Benjamin Intal - Gambit Technologies Inc
 * Author URI: http://gambit.ph
 * License: GPL2
@@ -12,7 +12,7 @@
 */
 
 // Used for tracking the version used
-defined( 'PBS_VERSION' ) or define( 'PBS_VERSION', '0.6' );
+defined( 'PBS_VERSION' ) or define( 'PBS_VERSION', '0.7' );
 
 // Used for file includes
 defined( 'PBS_PATH' ) or define( 'PBS_PATH', trailingslashit( dirname( __FILE__ ) ) );
@@ -20,7 +20,24 @@ defined( 'PBS_PATH' ) or define( 'PBS_PATH', trailingslashit( dirname( __FILE__ 
 require_once( PBS_PATH . 'lib/shortcode/hello-dolly.php' );
 require_once( PBS_PATH . 'lib/shortcode/jetpack-contact-form.php' );
 // require_once( PBS_PATH . 'lib/shortcode/jetpack-googlemaps.php' );
+require_once( PBS_PATH . 'lib/shortcode/jetpack-portfolio.php' );
 require_once( PBS_PATH . 'lib/shortcode/toggle.php' );
+require_once( PBS_PATH . 'lib/shortcode/widget-archives.php' );
+require_once( PBS_PATH . 'lib/shortcode/widget-calendar.php' );
+require_once( PBS_PATH . 'lib/shortcode/widget-categories.php' );
+require_once( PBS_PATH . 'lib/shortcode/widget-custom-menu.php' );
+require_once( PBS_PATH . 'lib/shortcode/widget-meta.php' );
+require_once( PBS_PATH . 'lib/shortcode/widget-pages.php' );
+require_once( PBS_PATH . 'lib/shortcode/widget-recent-comments.php' );
+require_once( PBS_PATH . 'lib/shortcode/widget-recent-posts.php' );
+require_once( PBS_PATH . 'lib/shortcode/widget-rss.php' );
+require_once( PBS_PATH . 'lib/shortcode/widget-search.php' );
+require_once( PBS_PATH . 'lib/shortcode/widget-tag-cloud.php' );
+require_once( PBS_PATH . 'lib/shortcode/widget-jetpack-display-wordpress-posts.php' );
+require_once( PBS_PATH . 'lib/shortcode/widget-jetpack-facebook-like-box.php' );
+require_once( PBS_PATH . 'lib/shortcode/widget-jetpack-gravatar-profile.php' );
+require_once( PBS_PATH . 'lib/shortcode/widget-jetpack-rss-links.php' );
+require_once( PBS_PATH . 'lib/shortcode/widget-jetpack-subscriptions.php' );
 
 
 /**

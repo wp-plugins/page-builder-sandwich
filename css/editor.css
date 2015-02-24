@@ -372,6 +372,12 @@ body#tinymce.wp-editor .pbsandwich_column .pbsandwich_column .jetpack-video-wrap
   box-sizing: border-box; }
 
 /**
+ * Jetpack Facbeook Like Box
+ */
+body#tinymce.wp-editor .sandwich .widget_facebook_likebox iframe {
+  width: 100% !important; }
+
+/**
  * Styles for the main page builder core
  */
 /**
@@ -460,3 +466,12 @@ body#tinymce.wp-editor {
     font-family: 'Dashicons';
     vertical-align: middle;
     margin-right: 10px; }
+  body#tinymce.wp-editor .sandwich .toggle .panel-body > div > p:last-of-type {
+    margin-bottom: 0; }
+
+body#tinymce.wp-editor {
+  /**
+   * Widget Titles
+   */ }
+  body#tinymce.wp-editor .sandwich.hide_title .widgettitle {
+    display: none; }
