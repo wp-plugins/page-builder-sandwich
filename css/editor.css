@@ -1,0 +1,482 @@
+/**
+ * Some of our shortcodes use bootstrap, use them also in the editor to get a nice display
+ */
+body#tinymce.wp-editor .sandwich .panel {
+  margin-bottom: 20px;
+  background-color: #fff;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); }
+body#tinymce.wp-editor .sandwich .panel-body {
+  padding: 15px; }
+  body#tinymce.wp-editor .sandwich .panel-body:before, body#tinymce.wp-editor .sandwich .panel-body:after {
+    content: " ";
+    display: table; }
+  body#tinymce.wp-editor .sandwich .panel-body:after {
+    clear: both; }
+body#tinymce.wp-editor .sandwich .panel-heading {
+  padding: 10px 15px;
+  border-bottom: 1px solid transparent;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px; }
+  body#tinymce.wp-editor .sandwich .panel-heading > .dropdown .dropdown-toggle {
+    color: inherit; }
+body#tinymce.wp-editor .sandwich .panel-title {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 16px;
+  color: inherit; }
+  body#tinymce.wp-editor .sandwich .panel-title > a,
+  body#tinymce.wp-editor .sandwich .panel-title > small,
+  body#tinymce.wp-editor .sandwich .panel-title > .small,
+  body#tinymce.wp-editor .sandwich .panel-title > small > a,
+  body#tinymce.wp-editor .sandwich .panel-title > .small > a {
+    color: inherit; }
+body#tinymce.wp-editor .sandwich .panel-footer {
+  padding: 10px 15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #ddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px; }
+body#tinymce.wp-editor .sandwich .panel > .list-group,
+body#tinymce.wp-editor .sandwich .panel > .panel-collapse > .list-group {
+  margin-bottom: 0; }
+  body#tinymce.wp-editor .sandwich .panel > .list-group .list-group-item,
+  body#tinymce.wp-editor .sandwich .panel > .panel-collapse > .list-group .list-group-item {
+    border-width: 1px 0;
+    border-radius: 0; }
+  body#tinymce.wp-editor .sandwich .panel > .list-group:first-child .list-group-item:first-child,
+  body#tinymce.wp-editor .sandwich .panel > .panel-collapse > .list-group:first-child .list-group-item:first-child {
+    border-top: 0;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px; }
+  body#tinymce.wp-editor .sandwich .panel > .list-group:last-child .list-group-item:last-child,
+  body#tinymce.wp-editor .sandwich .panel > .panel-collapse > .list-group:last-child .list-group-item:last-child {
+    border-bottom: 0;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px; }
+body#tinymce.wp-editor .sandwich .panel-heading + .list-group .list-group-item:first-child {
+  border-top-width: 0; }
+body#tinymce.wp-editor .sandwich .list-group + .panel-footer {
+  border-top-width: 0; }
+body#tinymce.wp-editor .sandwich .panel > .table,
+body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table,
+body#tinymce.wp-editor .sandwich .panel > .panel-collapse > .table {
+  margin-bottom: 0; }
+  body#tinymce.wp-editor .sandwich .panel > .table caption,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table caption,
+  body#tinymce.wp-editor .sandwich .panel > .panel-collapse > .table caption {
+    padding-left: 15px;
+    padding-right: 15px; }
+body#tinymce.wp-editor .sandwich .panel > .table:first-child,
+body#tinymce.wp-editor .sandwich .panel > .table-responsive:first-child > .table:first-child {
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px; }
+  body#tinymce.wp-editor .sandwich .panel > .table:first-child > thead:first-child > tr:first-child,
+  body#tinymce.wp-editor .sandwich .panel > .table:first-child > tbody:first-child > tr:first-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child {
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px; }
+    body#tinymce.wp-editor .sandwich .panel > .table:first-child > thead:first-child > tr:first-child td:first-child,
+    body#tinymce.wp-editor .sandwich .panel > .table:first-child > thead:first-child > tr:first-child th:first-child,
+    body#tinymce.wp-editor .sandwich .panel > .table:first-child > tbody:first-child > tr:first-child td:first-child,
+    body#tinymce.wp-editor .sandwich .panel > .table:first-child > tbody:first-child > tr:first-child th:first-child,
+    body#tinymce.wp-editor .sandwich .panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child td:first-child,
+    body#tinymce.wp-editor .sandwich .panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child th:first-child,
+    body#tinymce.wp-editor .sandwich .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child td:first-child,
+    body#tinymce.wp-editor .sandwich .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child th:first-child {
+      border-top-left-radius: 3px; }
+    body#tinymce.wp-editor .sandwich .panel > .table:first-child > thead:first-child > tr:first-child td:last-child,
+    body#tinymce.wp-editor .sandwich .panel > .table:first-child > thead:first-child > tr:first-child th:last-child,
+    body#tinymce.wp-editor .sandwich .panel > .table:first-child > tbody:first-child > tr:first-child td:last-child,
+    body#tinymce.wp-editor .sandwich .panel > .table:first-child > tbody:first-child > tr:first-child th:last-child,
+    body#tinymce.wp-editor .sandwich .panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child td:last-child,
+    body#tinymce.wp-editor .sandwich .panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child th:last-child,
+    body#tinymce.wp-editor .sandwich .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child td:last-child,
+    body#tinymce.wp-editor .sandwich .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child th:last-child {
+      border-top-right-radius: 3px; }
+body#tinymce.wp-editor .sandwich .panel > .table:last-child,
+body#tinymce.wp-editor .sandwich .panel > .table-responsive:last-child > .table:last-child {
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px; }
+  body#tinymce.wp-editor .sandwich .panel > .table:last-child > tbody:last-child > tr:last-child,
+  body#tinymce.wp-editor .sandwich .panel > .table:last-child > tfoot:last-child > tr:last-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px; }
+    body#tinymce.wp-editor .sandwich .panel > .table:last-child > tbody:last-child > tr:last-child td:first-child,
+    body#tinymce.wp-editor .sandwich .panel > .table:last-child > tbody:last-child > tr:last-child th:first-child,
+    body#tinymce.wp-editor .sandwich .panel > .table:last-child > tfoot:last-child > tr:last-child td:first-child,
+    body#tinymce.wp-editor .sandwich .panel > .table:last-child > tfoot:last-child > tr:last-child th:first-child,
+    body#tinymce.wp-editor .sandwich .panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child td:first-child,
+    body#tinymce.wp-editor .sandwich .panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child th:first-child,
+    body#tinymce.wp-editor .sandwich .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child td:first-child,
+    body#tinymce.wp-editor .sandwich .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child th:first-child {
+      border-bottom-left-radius: 3px; }
+    body#tinymce.wp-editor .sandwich .panel > .table:last-child > tbody:last-child > tr:last-child td:last-child,
+    body#tinymce.wp-editor .sandwich .panel > .table:last-child > tbody:last-child > tr:last-child th:last-child,
+    body#tinymce.wp-editor .sandwich .panel > .table:last-child > tfoot:last-child > tr:last-child td:last-child,
+    body#tinymce.wp-editor .sandwich .panel > .table:last-child > tfoot:last-child > tr:last-child th:last-child,
+    body#tinymce.wp-editor .sandwich .panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child td:last-child,
+    body#tinymce.wp-editor .sandwich .panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child th:last-child,
+    body#tinymce.wp-editor .sandwich .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child td:last-child,
+    body#tinymce.wp-editor .sandwich .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child th:last-child {
+      border-bottom-right-radius: 3px; }
+body#tinymce.wp-editor .sandwich .panel > .panel-body + .table,
+body#tinymce.wp-editor .sandwich .panel > .panel-body + .table-responsive,
+body#tinymce.wp-editor .sandwich .panel > .table + .panel-body,
+body#tinymce.wp-editor .sandwich .panel > .table-responsive + .panel-body {
+  border-top: 1px solid #ddd; }
+body#tinymce.wp-editor .sandwich .panel > .table > tbody:first-child > tr:first-child th,
+body#tinymce.wp-editor .sandwich .panel > .table > tbody:first-child > tr:first-child td {
+  border-top: 0; }
+body#tinymce.wp-editor .sandwich .panel > .table-bordered,
+body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered {
+  border: 0; }
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > thead > tr > th:first-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > thead > tr > td:first-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > tbody > tr > th:first-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > tbody > tr > td:first-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > tfoot > tr > th:first-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > tfoot > tr > td:first-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > thead > tr > th:first-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > thead > tr > td:first-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > tbody > tr > th:first-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > tbody > tr > td:first-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > tfoot > tr > th:first-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > tfoot > tr > td:first-child {
+    border-left: 0; }
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > thead > tr > th:last-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > thead > tr > td:last-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > tbody > tr > th:last-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > tbody > tr > td:last-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > tfoot > tr > th:last-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > tfoot > tr > td:last-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > thead > tr > th:last-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > thead > tr > td:last-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > tbody > tr > th:last-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > tbody > tr > td:last-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > tfoot > tr > th:last-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > tfoot > tr > td:last-child {
+    border-right: 0; }
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > thead > tr:first-child > td,
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > thead > tr:first-child > th,
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > tbody > tr:first-child > td,
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > tbody > tr:first-child > th,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > thead > tr:first-child > td,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > thead > tr:first-child > th,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > tbody > tr:first-child > td,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > tbody > tr:first-child > th {
+    border-bottom: 0; }
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > tbody > tr:last-child > td,
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > tbody > tr:last-child > th,
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > tfoot > tr:last-child > td,
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > tfoot > tr:last-child > th,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > tbody > tr:last-child > td,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > tbody > tr:last-child > th,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > tfoot > tr:last-child > td,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > tfoot > tr:last-child > th {
+    border-bottom: 0; }
+body#tinymce.wp-editor .sandwich .panel > .table-responsive {
+  border: 0;
+  margin-bottom: 0; }
+body#tinymce.wp-editor .sandwich .panel-group {
+  margin-bottom: 20px; }
+  body#tinymce.wp-editor .sandwich .panel-group .panel {
+    margin-bottom: 0;
+    border-radius: 4px; }
+    body#tinymce.wp-editor .sandwich .panel-group .panel + .panel {
+      margin-top: 5px; }
+  body#tinymce.wp-editor .sandwich .panel-group .panel-heading {
+    border-bottom: 0; }
+    body#tinymce.wp-editor .sandwich .panel-group .panel-heading + .panel-collapse > .panel-body,
+    body#tinymce.wp-editor .sandwich .panel-group .panel-heading + .panel-collapse > .list-group {
+      border-top: 1px solid #ddd; }
+  body#tinymce.wp-editor .sandwich .panel-group .panel-footer {
+    border-top: 0; }
+    body#tinymce.wp-editor .sandwich .panel-group .panel-footer + .panel-collapse .panel-body {
+      border-bottom: 1px solid #ddd; }
+body#tinymce.wp-editor .sandwich .panel-default {
+  border-color: #ddd; }
+  body#tinymce.wp-editor .sandwich .panel-default > .panel-heading {
+    color: #333333;
+    background-color: #f5f5f5;
+    border-color: #ddd; }
+    body#tinymce.wp-editor .sandwich .panel-default > .panel-heading + .panel-collapse > .panel-body {
+      border-top-color: #ddd; }
+    body#tinymce.wp-editor .sandwich .panel-default > .panel-heading .badge {
+      color: #f5f5f5;
+      background-color: #333333; }
+  body#tinymce.wp-editor .sandwich .panel-default > .panel-footer + .panel-collapse > .panel-body {
+    border-bottom-color: #ddd; }
+body#tinymce.wp-editor .sandwich .panel-primary {
+  border-color: #337ab7; }
+  body#tinymce.wp-editor .sandwich .panel-primary > .panel-heading {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #337ab7; }
+    body#tinymce.wp-editor .sandwich .panel-primary > .panel-heading + .panel-collapse > .panel-body {
+      border-top-color: #337ab7; }
+    body#tinymce.wp-editor .sandwich .panel-primary > .panel-heading .badge {
+      color: #337ab7;
+      background-color: #fff; }
+  body#tinymce.wp-editor .sandwich .panel-primary > .panel-footer + .panel-collapse > .panel-body {
+    border-bottom-color: #337ab7; }
+body#tinymce.wp-editor .sandwich .panel-success {
+  border-color: #d6e9c6; }
+  body#tinymce.wp-editor .sandwich .panel-success > .panel-heading {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6; }
+    body#tinymce.wp-editor .sandwich .panel-success > .panel-heading + .panel-collapse > .panel-body {
+      border-top-color: #d6e9c6; }
+    body#tinymce.wp-editor .sandwich .panel-success > .panel-heading .badge {
+      color: #dff0d8;
+      background-color: #3c763d; }
+  body#tinymce.wp-editor .sandwich .panel-success > .panel-footer + .panel-collapse > .panel-body {
+    border-bottom-color: #d6e9c6; }
+body#tinymce.wp-editor .sandwich .panel-info {
+  border-color: #bce8f1; }
+  body#tinymce.wp-editor .sandwich .panel-info > .panel-heading {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1; }
+    body#tinymce.wp-editor .sandwich .panel-info > .panel-heading + .panel-collapse > .panel-body {
+      border-top-color: #bce8f1; }
+    body#tinymce.wp-editor .sandwich .panel-info > .panel-heading .badge {
+      color: #d9edf7;
+      background-color: #31708f; }
+  body#tinymce.wp-editor .sandwich .panel-info > .panel-footer + .panel-collapse > .panel-body {
+    border-bottom-color: #bce8f1; }
+body#tinymce.wp-editor .sandwich .panel-warning {
+  border-color: #faebcc; }
+  body#tinymce.wp-editor .sandwich .panel-warning > .panel-heading {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #faebcc; }
+    body#tinymce.wp-editor .sandwich .panel-warning > .panel-heading + .panel-collapse > .panel-body {
+      border-top-color: #faebcc; }
+    body#tinymce.wp-editor .sandwich .panel-warning > .panel-heading .badge {
+      color: #fcf8e3;
+      background-color: #8a6d3b; }
+  body#tinymce.wp-editor .sandwich .panel-warning > .panel-footer + .panel-collapse > .panel-body {
+    border-bottom-color: #faebcc; }
+body#tinymce.wp-editor .sandwich .panel-danger {
+  border-color: #ebccd1; }
+  body#tinymce.wp-editor .sandwich .panel-danger > .panel-heading {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1; }
+    body#tinymce.wp-editor .sandwich .panel-danger > .panel-heading + .panel-collapse > .panel-body {
+      border-top-color: #ebccd1; }
+    body#tinymce.wp-editor .sandwich .panel-danger > .panel-heading .badge {
+      color: #f2dede;
+      background-color: #a94442; }
+  body#tinymce.wp-editor .sandwich .panel-danger > .panel-footer + .panel-collapse > .panel-body {
+    border-bottom-color: #ebccd1; }
+
+/**
+ * Editor only div-like styling
+ */
+body#tinymce.wp-editor .pbsandwich_column td {
+  vertical-align: top;
+  padding: 0 10px;
+  border: 1px dashed #ccc;
+  border-left: none; }
+
+body#tinymce.wp-editor .pbsandwich_column td:first-of-type {
+  border-left: 1px dashed #ccc; }
+
+/**
+ * Aesthetic margins
+ */
+body#tinymce.wp-editor .pbsandwich_column {
+  margin: 1em 0; }
+
+/**
+ * Don't show drag handlers for our tables
+ */
+body#tinymce.wp-editor .pbsandwich_column[data-mce-selected="1"] ~ .mce-resizehandle,
+body#tinymce.wp-editor.pbsandwich_column_selected .mce-resizehandle {
+  display: none !important; }
+
+/**
+ * Move cursor for our columns
+ */
+body#tinymce.wp-editor .pbsandwich_column td:hover,
+body#tinymce.wp-editor .pbsandwich_column td td:hover {
+  cursor: move; }
+
+body#tinymce.wp-editor .pbsandwich_column td *:not(.wpview-wrap) {
+  cursor: text; }
+
+/**
+ * Jetpack Videos
+ */
+body#tinymce.wp-editor .jetpack-video-wrapper iframe {
+  max-width: 100%;
+  width: 100%;
+  height: 518px; }
+
+body#tinymce.wp-editor .pbsandwich_column .jetpack-video-wrapper iframe {
+  height: 300px; }
+
+body#tinymce.wp-editor .pbsandwich_column .pbsandwich_column .jetpack-video-wrapper iframe {
+  height: 200px; }
+
+/**
+ * Jetpack Contact Form
+ */
+.contact-form .clear-form {
+  clear: both; }
+
+.contact-form input[type='text'], .contact-form input[type='email'] {
+  width: 300px;
+  max-width: 98%;
+  margin-bottom: 13px; }
+
+.contact-form select {
+  margin-bottom: 13px; }
+
+.contact-form textarea {
+  height: 200px;
+  width: 80%;
+  float: none;
+  margin-bottom: 13px; }
+
+.contact-form input[type='radio'], .contact-form input[type='checkbox'] {
+  float: none;
+  margin-bottom: 13px; }
+
+.contact-form label {
+  margin-bottom: 3px;
+  float: none;
+  font-weight: bold;
+  display: block; }
+
+.contact-form label.checkbox, .contact-form label.radio {
+  margin-bottom: 3px;
+  float: none;
+  font-weight: bold;
+  display: inline-block; }
+
+.contact-form label span {
+  color: #AAA;
+  margin-left: 4px;
+  font-weight: normal; }
+
+.form-errors .form-error-message {
+  color: red; }
+
+.textwidget .contact-form input[type='text'], .textwidget .contact-form input[type='email'], .textwidget .contact-form textarea {
+  width: 250px;
+  max-width: 100%;
+  box-sizing: border-box; }
+
+/**
+ * Jetpack Facbeook Like Box
+ */
+body#tinymce.wp-editor .sandwich .widget_facebook_likebox iframe {
+  width: 100% !important; }
+
+/**
+ * Styles for the main page builder core
+ */
+/**
+ * Drag placeholder
+ */
+body#tinymce.wp-editor .sortable-placeholder {
+  display: block;
+  height: 50px;
+  width: auto;
+  background: #f1f1f1;
+  border-radius: 5px; }
+
+/**
+ * Move cursor and hover color for shortcake & views
+ */
+body#tinymce.wp-editor .wpview-wrap:hover {
+  background: #f1f1f1; }
+
+body#tinymce.wp-editor .wpview-wrap, body#tinymce.wp-editor .wpview-wrap * {
+  cursor: move !important; }
+
+/**
+ * Toolbar styles, most of these are from the default WordPress styles
+ */
+body#tinymce.wp-editor #wp-column-toolbar {
+  position: absolute;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -o-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%); }
+
+body#tinymce.wp-editor #wp-column-toolbar .dashicons {
+  margin: 2px;
+  padding: 2px 3px;
+  width: 20px;
+  height: 20px;
+  color: #777;
+  cursor: pointer;
+  font-size: 20px;
+  border: 1px solid transparent;
+  border-radius: 2px; }
+
+body#tinymce.wp-editor #wp-column-toolbar .dashicons:hover {
+  background-color: #fafafa;
+  border-color: #999;
+  color: #222;
+  -webkit-box-shadow: inset 0 1px 0 #fff, 0 1px 0 rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 1px 0 #fff, 0 1px 0 rgba(0, 0, 0, 0.08);
+  outline: none; }
+
+body#tinymce.wp-editor #wp-column-toolbar {
+  z-index: 100;
+  background-color: #f5f5f5;
+  border: 1px solid #aaa;
+  padding: 1px;
+  cursor: default;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin-bottom: 8px; }
+
+/**
+ * Clone buttons added to toolbars cannot be hovered on properly. This fixes the buttons
+ */
+body#tinymce.wp-editor .toolbar .dashicons {
+  position: relative;
+  cursor: pointer !important; }
+
+body#tinymce.wp-editor {
+  /**
+   * Toggle shortcode
+   */ }
+  body#tinymce.wp-editor .sandwich .toggle [data-toggle="collapse"] {
+    display: block;
+    text-decoration: none; }
+  body#tinymce.wp-editor .sandwich .toggle [data-toggle="collapse"].collapsed:before,
+  body#tinymce.wp-editor .sandwich .toggle [data-toggle="collapse"][aria-expanded="false"]:before {
+    content: "\f132"; }
+  body#tinymce.wp-editor .sandwich .toggle [data-toggle="collapse"]:before {
+    content: "\f460";
+    font-family: 'Dashicons';
+    vertical-align: middle;
+    margin-right: 10px; }
+  body#tinymce.wp-editor .sandwich .toggle .panel-body > div > p:last-of-type {
+    margin-bottom: 0; }
+
+body#tinymce.wp-editor {
+  /**
+   * Widget Titles
+   */ }
+  body#tinymce.wp-editor .sandwich.hide_title .widgettitle {
+    display: none; }
