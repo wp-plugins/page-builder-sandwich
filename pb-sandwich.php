@@ -3,7 +3,7 @@
 * Plugin Name: Page Builder Sandwich
 * Plugin URI: https://github.com/gambitph/Page-Builder-Sandwich
 * Description: The native visual editor page builder. Empower your visual editor with drag and drop & column capabilities.
-* Version: 0.8
+* Version: 0.9
 * Author: Benjamin Intal - Gambit Technologies Inc
 * Author URI: http://gambit.ph
 * License: GPL2
@@ -12,7 +12,7 @@
 */
 
 // Used for tracking the version used
-defined( 'PBS_VERSION' ) or define( 'PBS_VERSION', '0.8' );
+defined( 'PBS_VERSION' ) or define( 'PBS_VERSION', '0.9' );
 
 // Used for file includes
 defined( 'PBS_PATH' ) or define( 'PBS_PATH', trailingslashit( dirname( __FILE__ ) ) );
@@ -24,6 +24,8 @@ require_once( PBS_PATH . 'lib/shortcode/jetpack-portfolio.php' );
 require_once( PBS_PATH . 'lib/shortcode/jetpack-twitter-timeline.php' );
 require_once( PBS_PATH . 'lib/shortcode/toggle.php' );
 require_once( PBS_PATH . 'lib/shortcode/embed.php' );
+require_once( PBS_PATH . 'lib/shortcode/html5video.php');
+require_once( PBS_PATH . 'lib/shortcode/html5video-remote.php');
 require_once( PBS_PATH . 'lib/shortcode/widget-archives.php' );
 require_once( PBS_PATH . 'lib/shortcode/widget-calendar.php' );
 require_once( PBS_PATH . 'lib/shortcode/widget-categories.php' );
@@ -40,6 +42,7 @@ require_once( PBS_PATH . 'lib/shortcode/widget-jetpack-facebook-like-box.php' );
 require_once( PBS_PATH . 'lib/shortcode/widget-jetpack-gravatar-profile.php' );
 require_once( PBS_PATH . 'lib/shortcode/widget-jetpack-rss-links.php' );
 require_once( PBS_PATH . 'lib/shortcode/widget-jetpack-subscriptions.php' );
+require_once( PBS_PATH . 'lib/shortcode/contact-form-7.php' );
 
 
 /**
@@ -65,6 +68,7 @@ class GambitPBSandwich {
 		add_filter( 'tiny_mce_before_init', array( $this, 'addSandwichBootstrap' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'loadFrontendScripts' ) );
 		add_action( 'init', array( $this, 'loadShortcake' ), 1 );
+		add_action( 'media_buttons', array( $this, 'addShortcodeButton' ), 100 );
 	}
 
 	
@@ -420,6 +424,11 @@ class GambitPBSandwich {
 		}
 		</style>
 		<?php
+	}
+	
+	
+	public function addShortcodeButton() {
+		echo '<a href="#" class="button sandwich-add-shortcode"><span class="wp-media-buttons-icon dashicons dashicons-migrate"></span><span class="wp-media-buttons-icon dashicons dashicons-migrate"></span> ' . __( 'Add Post Element', 'pbsandwich' ) . '</a>';
 	}
 	
 }
