@@ -3,7 +3,7 @@
 * Plugin Name: Page Builder Sandwich
 * Plugin URI: https://github.com/gambitph/Page-Builder-Sandwich
 * Description: The native visual editor page builder. Empower your visual editor with drag and drop & column capabilities.
-* Version: 0.9.1
+* Version: 0.10
 * Author: Benjamin Intal - Gambit Technologies Inc
 * Author URI: http://gambit.ph
 * License: GPL2
@@ -11,12 +11,19 @@
 * Domain Path: /languages
 */
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 // Used for tracking the version used
-defined( 'PBS_VERSION' ) or define( 'PBS_VERSION', '0.9.1' );
+defined( 'PBS_VERSION' ) or define( 'PBS_VERSION', '0.10' );
 
 // Used for file includes
 defined( 'PBS_PATH' ) or define( 'PBS_PATH', trailingslashit( dirname( __FILE__ ) ) );
+defined( 'PBS_URL' ) or define( 'PBS_URL', plugin_dir_url( __FILE__ ) );
+defined( 'PBS_FILE' ) or define( 'PBS_FILE', __FILE__ );
 
+require_once( PBS_PATH . 'lib/welcome.php' );
+require_once( PBS_PATH . 'lib/shortcake.php' );
 require_once( PBS_PATH . 'lib/shortcode/hello-dolly.php' );
 require_once( PBS_PATH . 'lib/shortcode/jetpack-contact-form.php' );
 // require_once( PBS_PATH . 'lib/shortcode/jetpack-googlemaps.php' );
@@ -43,6 +50,9 @@ require_once( PBS_PATH . 'lib/shortcode/widget-jetpack-gravatar-profile.php' );
 require_once( PBS_PATH . 'lib/shortcode/widget-jetpack-rss-links.php' );
 require_once( PBS_PATH . 'lib/shortcode/widget-jetpack-subscriptions.php' );
 require_once( PBS_PATH . 'lib/shortcode/contact-form-7.php' );
+require_once( PBS_PATH . 'lib/shortcode/mailchimp.php' );
+require_once( PBS_PATH . 'lib/shortcode/ninja-forms.php' );
+require_once( PBS_PATH . 'lib/shortcode/bbpress.php' );
 
 
 /**
