@@ -1,5 +1,17 @@
+<?php
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit;
+?>
 <script type="text/html" id="tmpl-pbs-column-row-edit-modal">
-		
+	
+	<?php
+	// Placeholder tabs
+	?>
+	<div class="pbsandwich_modal_tabs" style="display: none">
+		<div class="pbsandwich_modal_tab active" data-for="pbsandwich_column_row_edit">{{ data.styles }}</div>
+	</div>
+	
+	
 	<div id="pbsandwich_column_row_edit" class="sandwich_modal">
 		
 		<div class="style_area" style="display: inline-block; margin-right: 20px">
@@ -43,28 +55,25 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<div style="display: inline-block; width: 350px">
-			<h4>{{ data.border }}</h4>
-			<label for="border_style">
-				{{ data.style }}
-				<select id="border_style" name="border_style" value="{{ data.fields.border_style }}">
-					<option value="none"  <# if ( data.fields.border_style === 'none' ) { #> selected="selected" <# } #>>{{ data.none }}</option>
-					<option value="dotted"	<# if ( data.fields.border_style === 'dotted' ) { #> selected="selected" <# } #>>{{ data.dotted }}</option>
-					<option value="dashed"	<# if ( data.fields.border_style === 'dashed' ) { #> selected="selected" <# } #>>{{ data.dashed }}</option>
-					<option value="solid" <# if ( data.fields.border_style === 'solid' ) { #> selected="selected" <# } #>>{{ data.solid }}</option>
-					<option value="double" <# if ( data.fields.border_style === 'double' ) { #> selected="selected" <# } #>>{{ data.double }}</option>
-					<option value="groove" <# if ( data.fields.border_style === 'groove' ) { #> selected="selected" <# } #>>{{ data.groove }}</option>
-					<option value="ridge" <# if ( data.fields.border_style === 'ridge' ) { #> selected="selected" <# } #>>{{ data.ridge }}</option>
-					<option value="inset" <# if ( data.fields.border_style === 'inset' ) { #> selected="selected" <# } #>>{{ data.inset }}</option>
-					<option value="outset" <# if ( data.fields.border_style === 'outset' ) { #> selected="selected" <# } #>>{{ data.outset }}</option>
+			<label for="full_width">
+				{{ data.full_width }}
+				<select id="full_width" name="full_width" value="{{ data.fields.full_width }}">
+					<option value=""  <# if ( data.fields.full_width === '' ) { #> selected="selected" <# } #>>{{ data.full_width_normal }}</option>
+					<option value="1" <# if ( data.fields.full_width === '1' ) { #> selected="selected" <# } #>>{{ data.full_width_1 }}</option>
+					<option value="2" <# if ( data.fields.full_width === '2' ) { #> selected="selected" <# } #>>{{ data.full_width_2 }}</option>
+					<option value="3" <# if ( data.fields.full_width === '3' ) { #> selected="selected" <# } #>>{{ data.full_width_3 }}</option>
+					<option value="4" <# if ( data.fields.full_width === '4' ) { #> selected="selected" <# } #>>{{ data.full_width_4 }}</option>
+					<option value="5" <# if ( data.fields.full_width === '5' ) { #> selected="selected" <# } #>>{{ data.full_width_5 }}</option>
+					<option value="6" <# if ( data.fields.full_width === '6' ) { #> selected="selected" <# } #>>{{ data.full_width_6 }}</option>
+					<option value="7" <# if ( data.fields.full_width === '7' ) { #> selected="selected" <# } #>>{{ data.full_width_7 }}</option>
+					<option value="8" <# if ( data.fields.full_width === '8' ) { #> selected="selected" <# } #>>{{ data.full_width_8 }}</option>
+					<option value="9" <# if ( data.fields.full_width === '9' ) { #> selected="selected" <# } #>>{{ data.full_width_9 }}</option>
+					<option value="99" <# if ( data.fields.full_width === '99' ) { #> selected="selected" <# } #>>{{ data.full_width_99 }}</option>
 				</select>
 			</label>
-			<label for="border_color">{{ data.color }} <input type="text" id="border_color" name="border_color" value="{{ data.fields.border_color }}"/></label>
-			<label for="border_radius">
-				{{ data.radius }}
-				<input type="number" id="border_radius" name="border_radius" value="{{ data.fields.border_radius }}" class="small-text" min="0" max="999" step="1"/>px
-			</label>
+			<p class="description">{{ data.full_width_desc }}</p>
+		</div>
+		<div style="display: inline-block; width: 350px">
 			<h4>{{ data.background }}</h4>
 			<label for="background_color">{{ data.color }} <input type="text" id="background_color" name="background_color" value="{{ data.fields.background_color }}"/></label>
 			<label for="background_image" class="image_type">
@@ -97,6 +106,26 @@
 			<label for="background_position">
 				{{ data.position }}
 				<input type="text" id="background_position" name="background_position" value="{{ data.fields.background_position }}"/>
+			</label>
+			<h4>{{ data.border }}</h4>
+			<label for="border_style">
+				{{ data.style }}
+				<select id="border_style" name="border_style" value="{{ data.fields.border_style }}">
+					<option value="none"  <# if ( data.fields.border_style === 'none' ) { #> selected="selected" <# } #>>{{ data.none }}</option>
+					<option value="dotted"	<# if ( data.fields.border_style === 'dotted' ) { #> selected="selected" <# } #>>{{ data.dotted }}</option>
+					<option value="dashed"	<# if ( data.fields.border_style === 'dashed' ) { #> selected="selected" <# } #>>{{ data.dashed }}</option>
+					<option value="solid" <# if ( data.fields.border_style === 'solid' ) { #> selected="selected" <# } #>>{{ data.solid }}</option>
+					<option value="double" <# if ( data.fields.border_style === 'double' ) { #> selected="selected" <# } #>>{{ data.double }}</option>
+					<option value="groove" <# if ( data.fields.border_style === 'groove' ) { #> selected="selected" <# } #>>{{ data.groove }}</option>
+					<option value="ridge" <# if ( data.fields.border_style === 'ridge' ) { #> selected="selected" <# } #>>{{ data.ridge }}</option>
+					<option value="inset" <# if ( data.fields.border_style === 'inset' ) { #> selected="selected" <# } #>>{{ data.inset }}</option>
+					<option value="outset" <# if ( data.fields.border_style === 'outset' ) { #> selected="selected" <# } #>>{{ data.outset }}</option>
+				</select>
+			</label>
+			<label for="border_color">{{ data.color }} <input type="text" id="border_color" name="border_color" value="{{ data.fields.border_color }}"/></label>
+			<label for="border_radius">
+				{{ data.radius }}
+				<input type="number" id="border_radius" name="border_radius" value="{{ data.fields.border_radius }}" class="small-text" min="0" max="999" step="1"/>px
 			</label>
 		</div>
 

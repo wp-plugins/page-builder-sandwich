@@ -1015,7 +1015,14 @@
  * Button shortcode
  */
 .sandwich .pbs_button {
-  margin-bottom: 20px; }
+  margin-bottom: 20px;
+  text-align: center; }
+  .sandwich .pbs_button, .sandwich .pbs_button:hover, .sandwich .pbs_button a, .sandwich .pbs_button a:hover, .sandwich .pbs_button a:link, .sandwich .pbs_button a:link:hover, .sandwich .pbs_button a:visited, .sandwich .pbs_button a:visited:hover {
+    text-decoration: none; }
+  .sandwich .pbs_button.pbs_button_align_left {
+    text-align: left; }
+  .sandwich .pbs_button.pbs_button_align_right {
+    text-align: right; }
 
 /**
  * Fix box-sizing widths
@@ -1060,6 +1067,31 @@
     float: none !important;
     width: auto !important; } }
 /**
+ * Column alignment
+ */
+.pbsandwich_column.pbs-align-left > .row > div, .pbsandwich_column.pbs-align-right > .row > div, .pbsandwich_column.pbs-align-center > .row > div {
+  width: auto; }
+.pbsandwich_column.pbs-align-center {
+  text-align: left; }
+  .pbsandwich_column.pbs-align-center .row {
+    margin-left: 0 !important;
+    margin-right: 0 !important; }
+.pbsandwich_column.pbs-align-right .row {
+  float: right; }
+.pbsandwich_column.pbs-align-center > .row {
+  display: inline-block;
+  left: 50%;
+  position: relative;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%); }
+  .pbsandwich_column.pbs-align-center > .row:before, .pbsandwich_column.pbs-align-center > .row:after {
+    content: '';
+    display: none; }
+
+/**
  * HTML5 Videos
  */
 .sandwich .html5video {
@@ -1071,6 +1103,14 @@
  */
 .sandwich .widget_facebook_likebox iframe {
   width: 100% !important; }
+
+/**
+ * Jetpack Googlemaps
+ */
+.sandwich .googlemaps * {
+  display: none !important; }
+.sandwich .googlemaps iframe {
+  display: block !important; }
 
 /**
  * Toggle shortcode

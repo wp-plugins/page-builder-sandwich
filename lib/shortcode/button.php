@@ -4,6 +4,9 @@
  * Selections for button styles
  */
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 function sandwich_buttons_style_selection() {
 	$output = array();
 	$output['btn-default'] = __( "Default", 'pbsandwich' );
@@ -37,6 +40,18 @@ function sandwich_buttons_button_type() {
 	$output = array();
 	$output['normal'] = __( "Normal", 'pbsandwich' );
 	$output['ghost'] = __( "Ghost", 'pbsandwich' );
+	return $output;
+}
+
+/**
+ * Selections for button alignment
+ */
+
+function sandwich_buttons_align() {
+	$output = array();
+	$output['left'] = __( "left", 'pbsandwich' );
+	$output['center'] = __( "center", 'pbsandwich' );
+	$output['right'] = __( "right", 'pbsandwich' );
 	return $output;
 }
 
@@ -77,7 +92,7 @@ function sandwich_buttons() {
                     'type' => 'select',
 					'options' => sandwich_buttons_button_type(),
 					'description' => __( 'Choose the design to use. Ghost type renders the background color of the button transparent with a colored border.', 'pbsandwich' ),
-                ),
+                ),		
                 array(
                     'label' => __( 'Button Color Scheme', 'pbsandwich' ),
                     'attr' => 'style',
@@ -154,7 +169,14 @@ function sandwich_buttons() {
                     'label' => __( 'Open link in a new window?', 'pbsandwich' ),
                     'attr' => 'target',
                     'type' => 'checkbox',
-					'value' => 'true',
+					'value' => 'false',
+                ),
+                array(
+                    'label' => __( 'Alignment', 'pbsandwich' ),
+                    'attr' => 'align',
+                    'type' => 'select',
+					'options' => sandwich_buttons_align(),
+					'value' => 'center',
                 ),
                 array(
                     'label' => __( 'Full-width Button', 'pbsandwich' ),
@@ -178,12 +200,13 @@ function sandwich_buttons_shortcode( $attr, $content ) {
         'border_color' => '',
         'text_hover_color' => '',
         'button_hover_color' => '',
-        'border_hover_color' => '',			
+        'border_hover_color' => '',		
         'size' => 'btn-md',
         'border' => '',
         'radius' => '',
         'url' => '#',
-        'target' => 'true',
+        'target' => 'false',
+		'align' => 'center',
         'full_width' => 'false',
     ) );
 
@@ -200,7 +223,7 @@ function sandwich_buttons_shortcode( $attr, $content ) {
 	}
 
 	$appendices = ' href="' . esc_url( $attr['url'] ) . '"';
-	if ( $attr['target'] == 'true' ) {
+	if ( $attr['target'] == 'true' || $attr['target'] === true ) {
 		$appendices .= ' target="_blank"';
 	}
 
@@ -256,7 +279,7 @@ function sandwich_buttons_shortcode( $attr, $content ) {
 
 	?>
 
-	<div class="sandwich">
+	<div class="sandwich pbs_button pbs_button_align_<?php echo esc_attr( $attr['align'] ) ?>">
 		<a id="pbs_button-<?php echo esc_attr( $_sandwich_buttons_id ) ?>" class="pbs_button btn<?php echo $btnclass ?>" <?php echo $appendices ?> <?php echo $styling ?>>
 			<?php echo esc_attr( $attr['label'] ) ?>
 		</a>

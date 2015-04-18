@@ -12,6 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  */
 class GambitPBSandwichColumns {
 	
+	protected $modalTabs = array();
+	
 
 	/**
 	 * Hook onto WordPress
@@ -24,6 +26,12 @@ class GambitPBSandwichColumns {
 		add_action( 'save_post', array( $this, 'rememberColumnStyles' ), 10, 3 );
 		add_action( 'wp_head', array( $this, 'renderColumnStyles' ) );
 		add_action( 'admin_footer', array( $this, 'addColumnTemplates' ) );
+		add_filter( 'pbs_toolbar_buttons', array( $this, 'addColumnToolbarButtons' ), 1 );
+
+		add_action( 'admin_head', array( $this, 'addModalVar' ) );
+		add_action( 'admin_init', array( $this, 'addModalTabs' ) );
+		add_action( 'admin_footer', array( $this, 'addModalTabTemplates' ) );
+		add_filter( 'pbs_js_vars', array( $this, 'addModalTabVars' ) );
 	}
 	
 	
@@ -153,22 +161,31 @@ class GambitPBSandwichColumns {
 			'margin' => __( 'Margin', 'pbsandwich' ),
 			'row_settings' => __( 'Row Settings', 'pbsandwich' ),
 			
+			// Full-width rows
+			'full_width' => __( 'Full-width', 'pbsandwich' ),
+			'full_width_normal' => __( 'Do not break out into full width', 'pbsandwich' ),
+			'full_width_1' => sprintf( __( 'Break out of %s container', 'pbsandwich' ), '1' ),
+			'full_width_2' => sprintf( __( 'Break out of %s containers', 'pbsandwich' ), '2' ),
+			'full_width_3' => sprintf( __( 'Break out of %s containers', 'pbsandwich' ), '3' ),
+			'full_width_4' => sprintf( __( 'Break out of %s containers', 'pbsandwich' ), '4' ),
+			'full_width_5' => sprintf( __( 'Break out of %s containers', 'pbsandwich' ), '5' ),
+			'full_width_6' => sprintf( __( 'Break out of %s containers', 'pbsandwich' ), '6' ),
+			'full_width_7' => sprintf( __( 'Break out of %s containers', 'pbsandwich' ), '7' ),
+			'full_width_8' => sprintf( __( 'Break out of %s containers', 'pbsandwich' ), '8' ),
+			'full_width_9' => sprintf( __( 'Break out of %s containers', 'pbsandwich' ), '9' ),
+			'full_width_99' => __( 'Break out of all containers', 'pbsandwich' ),
+			'full_width_desc' => 'Rows are restricted to the content areas defined by your theme. You can use this to break out of the constraint and turn your row into a full width row.',
+			
+			'modal_tabs' => array(),
+			
 		);
 		$columnVars = apply_filters( 'pbs_column_vars', $columnVars );
+		$columnVars = apply_filters( 'pbs_js_vars', $columnVars );
 		
 		// Print out our variables
 		?>
 		<script type="text/javascript">
-        var pbsandwich_column = {
-			<?php
-			$varString = '';
-			foreach ( $columnVars as $key => $value ) {
-				$varString .= empty( $varString ) ? '' : ',';
-				$varString .= "$key: '" . addslashes( $value ) . "'";
-			}
-			echo $varString;
-			?>
-        };
+		var pbsandwich_column = <?php echo json_encode( $columnVars ) ?>;
         </script>
 		<?php
 	}
@@ -225,7 +242,6 @@ class GambitPBSandwichColumns {
 		    return;
 	    }
 	
-		include_once PBS_PATH . "/lib/templates/column-toolbar.php";
 		include_once PBS_PATH . "/lib/templates/column-change-modal.php";
 		include_once PBS_PATH . "/lib/templates/column-custom-modal-description.php";
 		include_once PBS_PATH . "/lib/templates/column-area-edit-modal.php";
@@ -290,7 +306,7 @@ class GambitPBSandwichColumns {
 		// Remove stray jQuery sortable classes
 		$html = preg_replace( '/(ui-sortable-handle|ui-sortable)/', '', $content );
 		$html = str_get_html( $html );
-
+		
 		$tables = $html->find( 'table.pbsandwich_column' );
 		$hashes = array();
 		while ( count( $tables ) > 0 ) {
@@ -320,12 +336,20 @@ class GambitPBSandwichColumns {
 					continue;
 				}
 				
+				$innerHTML = trim( $td->innertext );
+				
 				// Only add in paragraph tags if there aren't any. 
 				// This is to ensure that the spacing remains correct.
-				$innerHTML = $td->innertext;
-				if ( preg_match( '/<p>/', $innerHTML ) !== false ) {
-					$innerHTML = '<p>' . $td->innertext . '</p>';
+				// @see http://www.htmlhelp.com/reference/html40/inline.html
+				if ( preg_match( '/^<(a|abbr|acronym|b|bdo|big|br|cite|code|dfn|em|i|img|input|kbd|label|q|samp|select|small|span|strong|sub|sup|textarea|tt|var|button|del|ins|map|object|script)[^>]+>/', $innerHTML ) === 1 ) {
+					$innerHTML = '<p>' . $innerHTML . '</p>';
 				}
+				
+				// Remove blank classes
+				$innerHTML = preg_replace( '/\sclass=[\'"]\s*[\'"]/', '', $innerHTML );
+				
+				// Cleanup ends
+				$innerHTML = trim( $innerHTML );
 				
 				// Remove the widths since we are using classes for those:
 				$columnStyle = trim( preg_replace( '/(^|\s)width:[^;]+;\s?/', '', $td->style ) );
@@ -335,14 +359,25 @@ class GambitPBSandwichColumns {
 					$columnStyles .= '.sandwich.pbsandwich_column_%' . ( count( $hashes ) + 1 ) . '$s > div > div:nth-of-type(' . ( $key + 1 ) . ') { ' . wp_kses( $columnStyle, array(), array() ). ' }';
 				}
 				$styleDump .= esc_attr( $td->style );
+
+				// Gather all column data attributes
+				$dataAttributes = '';
+				foreach ( $td->getAllAttributes() as $key => $value ) {
+					if ( stripos( $key, 'data-' ) !== 0 || strlen( $value ) == '' ) {
+						continue;
+					}
+					if ( $key == 'data-wp-columnselect' ) { // This is a dummy attribute
+						continue;
+					}
+					$dataAttributes .= ' ' . $key . '="' . esc_attr( $value ) . '"';
+				}
 			
-				$newDivs .= '<div class="' . esc_attr( $td->class ) . '">' . $innerHTML . '</div>';
+				$newDivs .= '<div class="' . esc_attr( $td->class ) . '" ' . $dataAttributes . '>' . $innerHTML . '</div>';
 			}
 			
 			// Generate the unique ID of this column based on the margin rules it has. (crc32 is fast)
 			$hash = crc32( $styleDump );
 			$hashes[] = $hash;
-			
 			
 			/**
 			 * Build our converted <table>
@@ -355,13 +390,26 @@ class GambitPBSandwichColumns {
 			if ( ! empty( $columnStyles ) ) {
 				$tableClasses[] = 'pbsandwich_column_' . $hash;
 			}
-			$newDivs = '<div class="' . esc_attr( join( ' ', $tableClasses ) ) . '"><div class="row">' . $newDivs . '</div></div>';
+
+			// Gather all row/table data attributes
+			$dataAttributes = '';
+			foreach ( $html->find( 'table.pbsandwich_column', 0 )->getAllAttributes() as $key => $value ) {
+				if ( stripos( $key, 'data-' ) !== 0 || strlen( $value ) == '' ) {
+					continue;
+				}
+				$dataAttributes .= ' ' . $key . '="' . esc_attr( $value ) . '"';
+			}
+
+			// Create the actual row div
+			$newDivs = '<div class="' . esc_attr( join( ' ', $tableClasses ) ) . '" ' . $dataAttributes . '><div class="row">' . $newDivs . '</div></div>';
 						
 			$html->find( 'table.pbsandwich_column', 0 )->outertext = $newDivs;
 			
+			// Save the new HTML with the table replaced
 			$html = $html->save();
 			$html = str_get_html( $html );
-		
+			
+			// Move on to the next table
 			$tables = $html->find( 'table.pbsandwich_column' );
 		}
 		
@@ -375,10 +423,195 @@ class GambitPBSandwichColumns {
 			$columnStyles = str_replace( '%' . ( $key + 1 ) . '$s', $hash, $columnStyles );
 		}
 		
+		// Remove blank paragraphs (not &nbsp;)
+		$newHTML = (string) $html;
+		
+		// Remove weirdly appended paragraph tags (they are there for some odd reason)
+		$newHTML = preg_replace( '/(<p[^>]*>)([^<]*$)/', '$2', $newHTML );
+		
+		// Sometimes, our rows/columns get tangled up inside paragraphs, get rid of those
+		$newHTML = preg_replace( '/<p[^>]*>\s*(<div)/', '$1', $newHTML );
+		$newHTML = preg_replace( '/(<\/div>)\s*<\/p>/', '$1', $newHTML );
+		
+		// Since we're dealing with wrong paragraph tags, remove other wrong stuff such as
+		// multiple end paragraphs & multiple start paragraphs
+		$newHTML = preg_replace( '/(<\/p>)\s*<\/p>/', '$1', $newHTML );
+		$newHTML = preg_replace( '/<p[^>]+>\s*(<p[^>]+>)/', '$1', $newHTML );
+		
 		return array(
-			'content' => (string) $html,
+			'content' => $newHTML,
 			'styles' => $columnStyles,
 		);
+	}
+	
+	
+	public function addColumnToolbarButtons( $toolbarButtons ) {
+		
+		$toolbarButtons[] = array(
+			'label' => __( 'Column', 'pbsandwich' ),
+			'shortcode' => 'column',
+			'priority' => 1001,
+		);
+		$toolbarButtons[] = array(
+			'action' => 'column-edit-area',
+			'icon' => 'dashicons dashicons-edit',
+			'label' => __( 'Edit Column', 'pbsandwich' ),
+			'shortcode' => 'column',
+			'priority' => 1002,
+		);
+		$toolbarButtons[] = array(
+			'action' => 'column-clone-area',
+			'icon' => 'dashicons dashicons-images-alt',
+			'label' => __( 'Clone Column', 'pbsandwich' ),
+			'shortcode' => 'column',
+			'priority' => 1003,
+		);
+		$toolbarButtons[] = array(
+			'action' => 'column-remove-area',
+			'icon' => 'dashicons dashicons-no-alt',
+			'label' => __( 'Delete Column', 'pbsandwich' ),
+			'shortcode' => 'column',
+			'priority' => 1004,
+		);
+		$toolbarButtons[] = array(
+			'label' => '|',
+			'shortcode' => 'column',
+			'priority' => 1005,
+		);
+		
+		$toolbarButtons[] = array(
+			'label' => __( 'Row', 'pbsandwich' ),
+			'shortcode' => 'row',
+			'priority' => 1100,
+		);
+	    // Add align left button
+	    $toolbarButtons[] = array(
+	        'action' => 'row-align-left',
+	        'icon' => 'dashicons dashicons-align-left',
+	        'label' => __( 'Align Left', 'pbsandwich' ),
+			'shortcode' => 'row',
+			'priority' => 1101,			
+	    );
+	    // Add align center button
+	    $toolbarButtons[] = array(
+	        'action' => 'row-align-center',
+	        'icon' => 'dashicons dashicons-align-center',
+	        'label' => __( 'Align Center', 'pbsandwich' ),
+			'shortcode' => 'row',
+			'priority' => 1102,			
+	    );
+	    // Add align right button
+	    $toolbarButtons[] = array(
+	        'action' => 'row-align-right',
+	        'icon' => 'dashicons dashicons-align-right',
+	        'label' => __( 'Align Right', 'pbsandwich' ),
+			'shortcode' => 'row',	
+			'priority' => 1103,			
+	    );
+	    // Add align none button
+	    $toolbarButtons[] = array(
+	        'action' => 'row-align-none',
+	        'icon' => 'dashicons dashicons-align-none',
+	        'label' => __( 'Align None', 'pbsandwich' ),
+			'shortcode' => 'row',	
+			'priority' => 1104,			
+	    );			
+	    $toolbarButtons[] = array(
+	        'label' => '|',
+			'shortcode' => 'row',
+			'priority' => 1105,			
+	    );
+		$toolbarButtons[] = array(
+			'action' => 'column-edit-row',
+			'icon' => 'dashicons dashicons-edit',
+			'label' => __( 'Edit Row', 'pbsandwich' ),
+			'shortcode' => 'row',
+			'priority' => 1106,
+		);
+		$toolbarButtons[] = array(
+			'action' => 'column-columns',
+			'icon' => 'dashicons dashicons-tagcloud',
+			'label' => __( 'Change Columns', 'pbsandwich' ),
+			'shortcode' => 'row',
+			'priority' => 1107,
+		);
+		$toolbarButtons[] = array(
+			'action' => 'column-clone-row',
+			'icon' => 'dashicons dashicons-images-alt',
+			'label' => __( 'Change Columns', 'pbsandwich' ),
+			'shortcode' => 'row',
+			'priority' => 1108,
+		);
+		$toolbarButtons[] = array(
+			'action' => 'column-remove-row',
+			'icon' => 'dashicons dashicons-no-alt',
+			'label' => __( 'Delete Row', 'pbsandwich' ),
+			'shortcode' => 'row',
+			'priority' => 1109,
+		);
+		
+		return $toolbarButtons;
+	}
+	
+	
+	public function addModalVar() {
+	
+	    // check user permissions
+	    if ( ! current_user_can( 'edit_posts' ) && ! current_user_can( 'edit_pages' ) ) {
+		    return;
+	    }
+		
+		// Print out our variables
+		?>
+		<script type="text/javascript">
+		var pbs_modal_fields = {};
+        </script>
+		<?php
+	}
+	
+	public function addModalTabs() {
+		$this->modalTabs = apply_filters( 'pbs_modal_tabs', array() );
+		
+		foreach ( $this->modalTabs as $key => $tab ) {
+			$defaults = array(
+				'template' => '',
+				'template_id' => '',
+				'name' => '',
+				'shortcode' => 'row',
+			);
+		    $this->modalTabs[ $key ] = array_merge( $defaults, $tab );
+		}
+	}
+	
+	public function addModalTabTemplates() {
+	    // check user permissions
+	    if ( ! current_user_can( 'edit_posts' ) && ! current_user_can( 'edit_pages' ) ) {
+		    return;
+	    }
+		
+		foreach ( $this->modalTabs as $key => $tab ) {
+			if ( ! empty( $tab['template'] ) ) {
+				include_once $tab['template'];
+			}
+		}
+	}
+	
+	
+	public function addModalTabVars( $columnVars ) {
+		if ( empty( $this->modalTabs ) ) {
+			return $columnVars;
+		}
+		
+		$varsToOutput = array();
+		foreach ( $this->modalTabs as $tab ) {
+			// for security, don't include the template path
+			unset( $tab['template'] );
+			$varsToOutput[] = $tab;
+		}
+		
+		$columnVars['modal_tabs'] = $varsToOutput;
+		
+		return $columnVars;
 	}
 	
 }

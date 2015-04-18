@@ -1,10 +1,14 @@
 // @codekit-append "_editor-add-post-element.js";
 // @codekit-append "_editor-start.js";
 // @codekit-append "_editor-core.js";
+// @codekit-append "_editor-toolbars.js";
+// @codekit-append "_editor-toolbar-actions.js";
 // @codekit-append "_editor-columns.js";
 // @codekit-append "_editor-column-actions.js";
+// @codekit-append "_editor-modal.js";
 // @codekit-append "_editor-jetpack.js";
 // @codekit-append "_editor-end.js";
+// @codekit-append "_util.js";
 
 /**
  * Click handler for the "Add Post Element" button. Basically we open the WP Media Manager then activate the shortcake state
@@ -17,17 +21,13 @@ jQuery(document).ready(function($) {
 	});
 });
 
-
 (function() {
 	
 	/**
 	 * Add the button
 	 */
-    tinymce.PluginManager.add( 'pbsandwich', function( editor, url ) {
-		
-		
-		
-		
+    tinyMCE.PluginManager.add( 'pbsandwich', function( editor, url ) {
+		var $ = jQuery;
 
 var sortableInit = false;
 
@@ -96,10 +96,25 @@ function sortEndHandler( editor ) {
  * this is our custom scrolling function that makes the scrolling correct
  */
 function enhancedSortableScroll( event, ui ) {
-	
 	var $ = jQuery;
+	
 	var editorTop = $('#wp-content-editor-tools').height() + parseInt($('#wp-content-editor-tools').css('paddingTop')) + parseInt($('.mce-edit-area').css('paddingTop')) + $('#wpadminbar').height();
 	var editorBottom = $(window).height() - $('.mce-statusbar').height() - $('#post-status-info').height();
+	
+	// For faster performance, use this instead of $('.mce-edit-area').offset().top
+	// var element = $('.mce-edit-area')[0]
+	// var editAreaOffsetTop = element.offsetTop;
+	// while (element.parentNode) {
+	//     element = element.parentNode;
+	//
+	// 	// We found these elements to contribute to the correct value of $('.mce-edit-area').offset().top
+	// 	// via experimentation in the admin
+	// 	if ( $(element).is('#wp-content-wrap, #post-body-content, #poststuff, body') ) {
+	// 		if ( ! isNaN( element.offsetTop ) ) {
+	// 		    editAreaOffsetTop += element.offsetTop;
+	// 		}
+	// 	}
+	// }
 
 	var mouseTop = $('.mce-edit-area').offset().top + parseInt($('.mce-edit-area').css('paddingTop')) - $(window).scrollTop() + event.pageY;
 
@@ -121,7 +136,8 @@ function enhancedSortableScroll( event, ui ) {
  * experience a million times better.
  */
 function enhancedSortableSort( event, ui ) {
-	
+	var $ = jQuery;
+
 	// Also perform an enhanced scroll
 	enhancedSortableScroll( event, ui );
 	
@@ -136,27 +152,53 @@ function enhancedSortableSort( event, ui ) {
 	
 	// Find out the closest element from the one being dragged
 	ui.item.parents('body:eq(0)').find('.ui-sortable-handle:not(.ui-sortable-helper)').each(function() {
-		
+
 		// Don't include the current one being dragged
 		if ( $(this).parents('.ui-sortable-helper').length > 0 ) {
 			return;
 		}
+
+		var element = $(this)[0],
+			origElement = element,
+			childTop,
+			childLeft,
+			childHeight = element.offsetHeight,
+			childWidth = element.offsetWidth;
 		
-		var childTop = $(this).offset().top,
-			childHeight = $(this).outerHeight(),
-			childBottom = childTop + childHeight,
-			childLeft = $(this).offset().left,
-			childWidth = $(this).outerWidth(),
+		// Instead of using $(this).offset().top & $(this).offset().left, this is x10 FASTER!
+		childTop = element.offsetTop;
+		childLeft = element.offsetLeft;
+		
+		while (element.parentNode) {
+			
+		    element = element.parentNode;
+			
+			if ( ! isNaN( element.offsetTop ) ) {
+			    childTop += element.offsetTop;
+			}
+			
+			// For views, childLeft is computed correctly,
+			// Paragraph tags is incorrect though
+			if ( origElement.tagName === 'P' ) {
+				if ( ! isNaN( element.offsetLeft ) ) {
+				    childLeft += element.offsetLeft;
+				}
+			}
+			
+		}
+		
+		var childBottom = childTop + childHeight,
 			childRight = childLeft + childWidth;
-			
+
 		if ( childLeft <= pointerLeft && pointerLeft <= childRight ) {
-			
+
 			dist = Math.abs( childTop - pointerTop );
 			dist2 = Math.abs( childBottom - pointerTop );
+			
 			if ( dist > dist2 ) {
 				dist = dist2;
 			}
-			
+
 			if ( closestDist > dist ) {
 				closestDist = dist;
 				closestElement = $(this);
@@ -168,6 +210,7 @@ function enhancedSortableSort( event, ui ) {
 				}
 			}
 		}
+
 	});
 	
 	// Move the placeholder to the correct location
@@ -186,6 +229,7 @@ function enhancedSortableSort( event, ui ) {
  */
 function updateSortable( editor ) {
 	var $ = jQuery;
+	
 	// fixTableParagraphs( editor );
 	jQuery(editor.getBody()).sortable({
 		scroll: false, 
@@ -235,6 +279,7 @@ function updateSortable( editor ) {
  */
 jQuery('body').on('click', '[name="save"], #post-preview', function() { 
 	var $ = jQuery;
+	
 	try {
 		preUpdateSortable( tinyMCE.activeEditor );
 		$( tinyMCE.activeEditor.getBody() ).find('[class=""]').removeAttr('class');
@@ -258,104 +303,6 @@ jQuery('body').on('click', '.wp-switch-editor', function() {
 	preUpdateSortable( tinyMCE.activeEditor );
 	updateSortable( tinyMCE.activeEditor );
 });
-
-
-/**
- * When unselected, single clicking Shortcake / TinyMCE views will somehow start a sortable drag event.
- * This makes the view hard to release. This function fixes it. 
- * When the view is clicked (mousedown then mouseup only), it doesn't trigger a sortable drag event
- * When the view is click dragged for the first time, normal sortable drag event is handled normally.
- */
-function fixShortcakeDragging( editor ) {
-	var $ = jQuery;
-
-	// For views with iframes (e.g. video & audio), clicking on the iframe to play a preview
-	// won't work with sortable sorting. Our semi work-around is to just deselect the iframe
-	// so that it can still be dragged around after moving the mouse around/outside the iframe.
-	$(editor.getBody())
-	.on('mousemove', '.wpview-wrap[data-mce-selected="1"] .toolbar', function(e) {
-		var $ = jQuery;
-
-		var parent = $(this).parents('.wpview-wrap:eq(0)');
-		if ( ! parent.is('[data-check-move="1"]') ) {
-			return;
-		}
-		if ( parent.find('iframe').length === 0 ) {
-			return;
-		}
-		
-		if ( e.which !== 1 ) {
-			try {
-				$(editor.getBody()).sortable('disable');
-				$(editor.getBody()).find('.pbsandwich_column td').sortable('disable');
-			} catch (e) { }
-
-			parent.trigger('mouseup');
-
-			try {
-				$(editor.getBody()).sortable('enable');
-				$(editor.getBody()).find('.pbsandwich_column td').sortable('enable');
-			} catch (e) { }
-			
-		}
-	})
-	.on('mousemove', function(e) {
-		var $ = jQuery;
-		
-		var iframe = $(this).find('.wpview-wrap[data-mce-selected="1"] iframe');
-		if ( iframe.length === 0 ) {
-			return;
-		}
-		
-		if ( e.which !== 1 ) {
-		
-			try {
-				$(editor.getBody()).sortable('disable');
-				$(editor.getBody()).find('.pbsandwich_column td').sortable('disable');
-			} catch (e) { }
-
-			iframe.parents('.wpview-wrap:eq(0)').trigger('mouseup');
-
-			try {
-				$(editor.getBody()).sortable('enable');
-				$(editor.getBody()).find('.pbsandwich_column td').sortable('enable');
-			} catch (e) { }
-			
-		}
-	})
-	
-	
-	/**
-	 * All these below are weird hacky stuff that was written via trial and error
-	 * These do/fix:
-	 *	- clicking on a view should do nothing (sometimes, clicking starts a drag)
-	 * 	- click + drag on a view should drag it
-	 * 	- mouseup after a drag should release the drag (mouse up after a drag somehow doesn't work)
-	 */
-	.on('click', '.wpview-wrap', function(e) {
-		if ( $(this).is('[data-check-move="1"]') ) {
-			$(this).trigger('mouseup');
-		}
-	})
-	.on('mousemove', '.wpview-wrap', function(e) {
-		if ( $(this).is('[data-check-move="1"]') ) {
-			$(this).removeAttr('data-check-move');
-		}
-	})
-	.on('mouseup', '.wpview-wrap', function( e, stopRecurse ) {
-		if ( stopRecurse ) {
-			return false;
-		}
-		var $this = $(this);
-		setTimeout(function() {
-			$this.trigger('mousemove').trigger('mouseup', [ e, true ]);
-		}, 100);
-	})
-	.on('mousedown', '.wpview-wrap', function(e) {
-		$(this).attr('data-check-move', '1');
-	});
-	
-}
 
 
 /**
@@ -391,12 +338,12 @@ function fixTableParagraphs( editor ) {
 		}
 		
 		// Columns that get emptied should still have a paragraph
-		if ( $(this).children().length == 0 ) {
+		if ( $(this).children().length === 0 ) {
 			$(this).append('<p></p>');
 		}
 		
 		// Columns with just a blank paragraph will not be edited unless they have a space
-		if ( $(this).children().length == 1 ) {
+		if ( $(this).children().length === 1 ) {
 			var firstChild = $(this).children(':eq(0)');
 			if ( firstChild.is('p') && firstChild.text() === '' ) {
 				firstChild.text( '\u00a0' );
@@ -413,60 +360,103 @@ function fixTableParagraphs( editor ) {
 editor.on('mousemove', function(e) {
 	if ( ! sortableInit ) {
 		updateSortable( editor );
-		fixShortcakeDragging( editor );
 		sortableInit = true;
 	}
 } );
 
 
 /**
- * Adds a clone button in shortcake/view toolbars.
- * Add a click handler & clone method for the new clone button.
+ * Bug fixers
  */
 editor.on('init', function(e) {
 	var $ = jQuery;
+	
+	var waitingForDrag = false;
+	
+	var waitingForEmbedDrag = false;
+	var startEmbedDrag = false;
+	
 	$( editor.getBody() ).on('mousedown', function(e) {
 		
+		// Continue as normal when the toolbar is clicked
+		if ( $(e.target).is('.toolbar .dashicons') || $(e.target).parents('.toolbar').length > 0 ) {
+			return;
+		}
+		
+		// Get the shortcode being dragged
 		var wrapper = null;
 		if ( $(e.target).is('.wpview-wrap') ) {
 			wrapper = $(e.target);
 		} else if ( $(e.target).parents('.wpview-wrap:eq(0)').length > 0 ) {
 			wrapper = $(e.target).parents('.wpview-wrap:eq(0)');
 		}
-		
 		if ( wrapper === null ) {
 			return;
 		}
 		
-		if ( wrapper.find('.clone').length === 0 ) {
-			$('<div class="dashicons dashicons-images-alt clone" title="Clone"></div>').insertBefore( wrapper.find('.toolbar > .dashicons:eq(-1)') );
+		// This fixes embed dragging. Clicking embeds (mousedown then mouseup, no mousemove) triggers
+		// a sortable drag. This fixes the problem.
+		if ( wrapper.is('[data-wpview-type="embed"]') ) {
+			e.stopPropagation();
 		}
 		
-		if ( $(e.target).is('.dashicons.clone') ) {
-			// cancelSortable( editor );
-			preUpdateSortable( editor );
-			var newElement = wrapper.clone();
-			newElement.insertAfter( wrapper ).trigger('click');
-			updateSortable( editor );
-
-			// Cleanup to make views with iframes display again
-			if ( newElement.find('iframe').length > 0 ) {
-				editor.execCommand( 'mceCleanup' );
-			}
-		}
-		
+		waitingForDrag = true;
+		return;
 		
 		/**
 		 * Fixes the bug in Firefox when a view with an iframe is clicked, it
 		 * always gets dragged
 		 */
-		if ( ! $(e.target).is('.toolbar .dashicons') && ! $(e.target).parents('.toolbar').length > 0 ) {
+		if ( ! $(e.target).is('.toolbar .dashicons') && $(e.target).parents('.toolbar').length > 0 ) {
 			if ( wrapper.find('iframe').length > 0 ) {
 				e.stopPropagation();
 				if ( $(this).is('[data-check-move="1"]') ) {
 					$(this).trigger('mouseup');
 				}
 			}
+		}
+		
+	});
+	
+	$( editor.getBody() ).on('mousemove', function(e) {
+		// We dragged, don't stop 
+		waitingForDrag = false;
+	});
+	
+
+	/**
+	 * Fixes a bug where clicking views/elements in some areas for the first time initiates a drag
+	 */
+	$( editor.getBody() ).on('mouseup', function(e) {
+		
+		// Continue as normal when the toolbar is clicked
+		if ( $(e.target).is('.toolbar .dashicons') || $(e.target).parents('.toolbar').length > 0 ) {
+			return;
+		}
+		
+		e.preventDefault();
+		
+		// Get the shortcode being dragged
+		var wrapper = null;
+		if ( $(e.target).is('.wpview-wrap') ) {
+			wrapper = $(e.target);
+		} else if ( $(e.target).parents('.wpview-wrap:eq(0)').length > 0 ) {
+			wrapper = $(e.target).parents('.wpview-wrap:eq(0)');
+		}
+		if ( wrapper === null ) {
+			return;
+		}
+
+		// Bugfix: Firefox does not want to release the sortable even after mouseup, this fixes it
+		$(editor.getBody()).mouseup();
+		
+		// Waiting for drag remains true, this means we just clicked on the shortcode,
+		// don't initiate a drag
+		if ( waitingForDrag ) {
+			e.stopImmediatePropagation();
+
+			$(this).trigger('mouseup');
+			return;
 		}
 		
 	});
@@ -483,6 +473,7 @@ editor.on('init', function(e) {
 var numShortcakes = -1;
 editor.on('wp-body-class-change change', function(e) {
 	var $ = jQuery;
+	
 	// At the start, remember the number of shortcakes/views
 	if ( numShortcakes === -1 ) {
 		numShortcakes = $(editor.getBody()).find('.wpview-wrap').length;
@@ -521,7 +512,430 @@ editor.on('wp-body-class-change change', function(e) {
 	var $ = jQuery;
 	
 	$(editor.getBody()).find('.wpview-body .wpview-content:has(iframe):not(:has( ~ .wpview-overlay))').after( '<div class="wpview-overlay"></div>' );
+});
 
+
+/**
+ * Prevent row/column content deletion from making the column untypable
+ */
+editor.on('keyup', function(e) {
+	fixTableParagraphs( editor );
+});
+
+
+/**
+ * Prevent delete & backspace buttons from deleting single column rows
+ */
+editor.on('keydown', function(e) {
+	var $ = jQuery;
+	
+	// If backspace is pressed and we are at the start of the line, ignore
+	if ( e.keyCode === 8 ) {
+		var range = editor.selection.getRng();
+		if ( range.startOffset === 0 ) {
+			return true;
+		}
+	}
+	
+	// If delete key is pressed and we have a single character, ignore (else the column will get deleted)
+	if ( e.keyCode === 46 ) {
+        var elem = editor.selection.getNode().parentNode;
+        if ( $(editor.selection.getNode().parentNode).is('.pbsandwich_column > tbody > tr > td') ) {
+			var range = editor.selection.getRng();
+			
+            if (range.startOffset === 1 && elem.textContent.length == 1) {
+				return true;
+            }
+        }
+	}
+	
+    // Prevent delete & backspace from deleting the whole row
+    if ( e.keyCode === 8 || e.keyCode === 46 ) {
+        try {
+            var elem = editor.selection.getNode().parentNode;
+            if ( $(editor.selection.getNode().parentNode).is('.pbsandwich_column > tbody > tr > td') ) {
+                if (elem.textContent.length == 1) {
+					editor.selection.getNode().textContent = '';
+                    e.preventDefault();
+                    return false;
+                }
+            }
+        } catch (e) {}
+    }
+});
+
+
+/**
+ * Properly resize videos, fitvids don't work here, do things manually
+ */
+editor.on('init', function() {
+	var $ = jQuery;
+	
+	$(editor.getBody()).on('DOMNodeInserted', function() {
+		setTimeout( function() {
+			$(editor.getBody()).find('[data-wpview-type="embed"] iframe').each(function() {
+				$(this).height( $(this).width() * 9 / 16 );
+			});
+		}, 1 );
+	});
+	
+});
+
+/**
+ * Toolbar functionality
+ */
+editor.on('init', function(e) {
+	var $ = jQuery;
+	
+	
+	/**
+	 * Add the toolbar in views (shortcakes)
+	 */
+	$( editor.getBody() ).on('mousedown', function(e) {
+		
+		var wrapper = null;
+		if ( $(e.target).is('.wpview-wrap') ) {
+			wrapper = $(e.target);
+		} else if ( $(e.target).parents('.wpview-wrap:eq(0)').length > 0 ) {
+			wrapper = $(e.target).parents('.wpview-wrap:eq(0)');
+		}
+		
+		if ( wrapper === null ) {
+			return;
+		}
+		
+		// Add the toolbar buttons
+		var newButton, shortcode;
+		if ( typeof pbsandwich_column.toolbar_buttons !== 'undefined' ) {
+			$.each(pbsandwich_column.toolbar_buttons, function(i, button) {
+				
+				// Check if we should add in the button
+				shortcode = wrapper.attr('data-wpview-type');
+				if ( typeof button.shortcode === 'string' ) {
+					if ( button.shortcode !== '' && button.shortcode !== shortcode ) {
+						return;
+					}
+				} else { // it's an array
+					if ( button.shortcode.indexOf( shortcode ) === -1 ) {
+						return;
+					}
+				}
+				
+				// Add the actual button, don't add it if it already exists
+				if ( wrapper.find('[data-hash="' + button.hash + '"]').length === 0 ) {
+
+					if ( button.label === '|' ) {
+						newButton = $('<div class="dashicons sep"></div>');
+						
+					} else if ( button.action === '' ) {
+						newButton = $('<div class="toolbar-label"></div>').text( button.label );
+						
+					} else {
+						newButton = $('<div class="' + button.icon + '" data-toolbar-action="' + button.action + '"></div>')
+							.attr('aria-label', button.label)
+							.attr('title', button.label);
+					}
+					newButton.attr('data-hash', button.hash);
+					
+					// Sort the buttons via priority
+					if ( button.priority >= 100 ) { // Before the edit button
+						newButton.insertBefore( wrapper.find('.toolbar > .dashicons:eq(-2)') );
+					} else if ( button.priority >= 0 ) { // Between the edit button and the remove button
+						newButton.insertBefore( wrapper.find('.toolbar > .dashicons:eq(-1)') );
+					} else { // After the remove button
+						newButton.insertAfter( wrapper.find('.toolbar > .dashicons:eq(-1)') );
+					}
+					
+				}
+				
+			});
+
+		}
+		
+		editor.fire( 'show-toolbar', {
+			'editor': editor,
+			'target': e.target,
+			'shortcode': wrapper.attr('data-wpview-type'),
+			'toolbar': wrapper.find('.toolbar')[0]
+		} );
+		
+	});
+	
+	
+
+	/**
+	 * Add the clone button in image toolbars
+	 */
+	$( editor.getBody() ).on('mousedown', function(e) {
+		if ( ! $(e.target).is('img.alignleft, img.alignright, img.aligncenter, img.alignnone') ) {
+			return;
+		}
+
+		// Add the toolbar buttons
+		if ( typeof pbsandwich_column.toolbar_buttons !== 'undefined' ) {
+			$.each(pbsandwich_column.toolbar_buttons, function(i, button) {
+				
+				// Check if we should add in the button
+				if ( typeof button.shortcode === 'string' ) {
+					if ( button.shortcode !== '' && button.shortcode !== 'image' ) {
+						return;
+					}
+				} else { // it's an array
+					if ( button.shortcode.indexOf( 'image' ) === -1 ) {
+						return;
+					}
+				}
+				
+				// Add the actual button, don't add it if it already exists
+				if ( $('.mce-wp-image-toolbar .mce-btn-group.mce-container [data-hash="' + button.hash + '"]').length === 0 ) {
+
+					var newButton;
+					if ( button.label === '|' ) {
+						newButton = $('<div class="mce-widget mce-btn sep"></div>');
+						
+					} else if ( button.action === '' ) {
+						newButton = $('<div class="mce-widget mce-btn toolbar-label"></div>').text( button.label );
+						
+					} else {
+						newButton = $('<div class="mce-widget mce-btn sandwich-toolbar-button" tabindex="-1" role="button" aria-pressed="false"><button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-dashicon ' + button.icon + '" data-toolbar-action="' + button.action + '"></i></button></div>')
+							.attr('aria-label', button.label)
+							.attr('title', button.label);
+					}
+					newButton.attr('data-hash', button.hash);
+				
+					// Sort the buttons via priority
+					if ( button.priority >= 100 ) { // Before the edit button
+						newButton.insertBefore( $('.mce-wp-image-toolbar .mce-btn-group.mce-container .mce-widget.mce-btn:eq(-2)') );
+					} else if ( button.priority >= 0 ) { // Between the edit button and the remove button
+						newButton.insertBefore( $('.mce-wp-image-toolbar .mce-btn-group.mce-container .mce-widget.mce-btn:eq(-1)') );
+					} else { // After the remove button
+						newButton.insertAfter( $('.mce-wp-image-toolbar .mce-btn-group.mce-container .mce-widget.mce-btn:eq(-1)') );
+					}
+					
+				}
+				
+			});
+
+		}
+		
+		editor.fire( 'show-toolbar-image', {
+			'editor': editor,
+			'target': e.target,
+			'toolbar': $('.mce-wp-image-toolbar')[0]
+		} );
+		editor.fire( 'show-toolbar', {
+			'editor': editor,
+			'target': e.target,
+			'shortcode': wrapper.attr('data-wpview-type'),
+			'toolbar': $('.mce-wp-image-toolbar')[0]
+		} );
+		
+	});
+});
+
+	
+/**
+ * Add the toolbar in columns
+ */
+editor.on('show-toolbar-column', function(e) {
+	var $ = jQuery;
+	var toolbar = $(e.toolbar);
+	
+	// Add the toolbar buttons
+	var inColumn, inRow;
+	if ( typeof pbsandwich_column.toolbar_buttons !== 'undefined' ) {
+		$.each(pbsandwich_column.toolbar_buttons, function(i, button) {
+			
+			// Check if we should add in the button
+			if ( typeof button.shortcode === 'string' ) {
+				inColumn = button.shortcode === 'column';
+				inRow = button.shortcode === 'row';
+			} else { // it's an array
+				inColumn = button.shortcode.indexOf( 'column' ) !== -1;
+				inRow = button.shortcode.indexOf( 'row' ) !== -1;
+			}
+
+			// Don't add it if it already exists
+			if ( toolbar.find('[data-hash="' + button.hash + '"]').length > 0 ) {
+				return;
+			}
+
+			// Create a button or a separator
+			var newButton;
+			if ( button.label === '|' ) {
+				newButton = $('<div class="sep" data-mce-bogus="1"></div>');
+				
+			} else if ( button.action === '' ) {
+				// Instead of outright printing the label, add it as a pseudo element so it won't get printed in the content
+				newButton = $('<div class="toolbar-label" data-mce-bogus="1"></div>')
+				.addClass('hash-' + button.hash)
+				.append('<style>.hash-' + button.hash + ':before { content: "' + button.label.replace(/"/g, '\\\"') + '" }</style>');
+				
+				
+			} else {
+
+				// Create the button
+				newButton = $('<div class="' + button.icon + '" data-toolbar-action="' + button.action + '" data-mce-bogus="1"></div>')
+					.attr('aria-label', button.label)
+					.attr('title', button.label);
+			}
+			newButton.attr('data-hash', button.hash);
+			
+			
+			// Add the button to the toolbar
+			if ( inColumn ) {
+			
+				// Sort the buttons via priority
+				newButton.attr('data-shortcode', 'column');
+				if ( button.priority >= 1000 ) {
+					newButton.clone().prependTo( toolbar );
+				} else if ( button.priority >= 100 ) { // Before the edit button
+					newButton.clone().insertBefore( toolbar.find('[data-toolbar-action="column-edit-area"]') );
+				} else if ( button.priority >= 0 ) { // Between the edit/clone button and the remove button
+					newButton.clone().insertBefore( toolbar.find('[data-toolbar-action="column-remove-area"]') );
+				} else { // After the remove button
+					newButton.clone().insertAfter( toolbar.find('[data-toolbar-action="column-remove-area"]') );
+				}
+				
+			}
+			if ( inRow ) {
+			
+				// Sort the buttons via priority
+				newButton.attr('data-shortcode', 'row');
+				if ( button.priority >= 1000 ) {
+					newButton.clone().prependTo( toolbar );
+				} else if ( button.priority >= 100 ) { // Before the edit button
+					newButton.clone().insertBefore( toolbar.find('[data-toolbar-action="column-edit-row"]') );
+				} else if ( button.priority >= 0 ) { // Between the edit/clone button and the remove button
+					newButton.clone().insertBefore( toolbar.find('[data-toolbar-action="column-remove-row"]') );
+				} else { // After the remove button
+					newButton.clone().insertAfter( toolbar.find('[data-toolbar-action="column-remove-row"]') );
+				}
+				
+			}
+			
+		});
+
+	}
+	
+	
+	// Dispatch toolbar show event
+	editor.fire( 'toolbar-column-buttons-done', {
+		'editor': editor,
+		'target': e.target,
+		'toolbar': e.toolbar,
+		'node': e.node
+	} );
+
+	editor.fire( 'show-toolbar', {
+		'editor': editor,
+		'target': e.target,
+		'shortcode': 'column',
+		'toolbar': e.toolbar,
+	} );
+	editor.fire( 'show-toolbar', {
+		'editor': editor,
+		'target': $(e.target).parents('.pbsandwich_column:eq(0)')[0],
+		'shortcode': 'row',
+		'toolbar': e.toolbar,
+	} );
+});
+
+
+/**
+ * Fire toolbar actions (for images only)
+ */
+jQuery('body').on('mousedown', '.mce-widget.mce-btn, .mce-widget.mce-btn button, [data-toolbar-action]', function(e) {
+	var $ = jQuery;
+	
+	e.preventDefault();
+	
+	// If the button (not the icon) was clicked
+	if ( $(e.target).is(':not([data-toolbar-action])') ) {
+		if ( $(e.target).find('[data-toolbar-action]').length === 0 ) {
+			return;
+		}
+		e.target = $(e.target).find('[data-toolbar-action]')[0];
+	}
+	
+	var action = $(e.target).attr('data-toolbar-action');
+	var target = $(editor.getBody()).find('[data-mce-selected="1"]:not(.pbsandwich_column)');
+	
+	editor.fire( 'toolbar-' + action, {
+		'action': action,
+		'editor': editor,
+		'shortcode': 'image',
+		'target': target
+	} );
+	
+	e.stopPropagation();
+});
+
+
+/**
+ * Fire toolbar actions (for views only & columns/rows)
+ */
+editor.on('init', function(e) {
+	var $ = jQuery;
+	
+	$(editor.getBody()).on('mousedown', '[data-toolbar-action]', function(e) {
+		
+		e.preventDefault();
+		
+		var action = $(e.target).attr('data-toolbar-action');
+		var target = $(editor.getBody()).find('[data-mce-selected="1"]:not(.pbsandwich_column)');
+		
+		/**
+		 * Handle colummn toolbar buttons
+		 */
+		if ( $(e.target).parents('#wp-column-toolbar').length > 0 ) {
+			
+			if ( $(e.target).attr('data-shortcode') === 'column' ) {
+				target = $(editor.getBody()).find('[data-wp-columnselect="1"]');
+			} else { // row
+				target = $(editor.getBody()).find('[data-wp-columnselect="1"]').parents('.pbsandwich_column:eq(0)');
+			}
+
+			editor.fire( 'toolbar-' + action, {
+				'action': action,
+				'editor': editor,
+				'shortcode': $(e.target).attr('data-shortcode'),
+				'target': target
+			} );
+			
+			return;
+		}
+		
+		/**
+		 * Normal column toolbar buttons
+		 */
+		editor.fire( 'toolbar-' + action, {
+			'action': action,
+			'editor': editor,
+			'shortcode': target.attr('data-wpview-type'),
+			'target': target
+		} );
+		
+		e.stopPropagation();
+		
+	});
+});
+
+/**
+ * Clone button action handler
+ */
+editor.on('toolbar-clone', function(e) {
+	var $ = jQuery;
+
+	preUpdateSortable( editor );
+	var newElement = $(e.target).clone();
+	newElement.insertAfter( $(e.target) ).trigger('click');
+	updateSortable( editor );
+
+	// Cleanup to make views with iframes display again
+	if ( newElement.find('iframe').length > 0 ) {
+		editor.execCommand( 'mceCleanup' );
+	}
 });
 
 /**
@@ -561,20 +975,45 @@ function _pbsandwich_addColumnToolbar( editor, node ) {
 	dom.setAttrib( node, 'data-wp-columnselect', 1 );
 
 	// Create the toolbar
-	toolbarHtml = wp.template( 'pbs-column-toolbar' );
-
-	var editorWidth = $(editor.getDoc()).width();
-		
 	toolbar = dom.create( 'div', {
 		'id': 'wp-column-toolbar',
 		'data-mce-bogus': '1',
 		'contenteditable': false
-	}, toolbarHtml( pbsandwich_column ) );
+	});
 
 	editor.getBody().appendChild( toolbar );
+	
+	// Dispatch toolbar show event
+	editor.fire( 'show-toolbar-column', {
+		'editor': editor,
+		'target': $(editor.getBody()).find( '[data-wp-columnselect]' )[0],
+		'toolbar': toolbar,
+		'node': node
+	} );
+}
+
+
+/**
+ * Makes sure that the column toolbar is always visible
+ */
+editor.on('toolbar-column-buttons-done', function(e) {
+	var $ = jQuery;
+	var rectangle, left, 
+	node = e.node,
+	dom = editor.dom
+	toolbar = e.toolbar,
+	editorWidth = $(editor.getDoc()).width();
+	
+	// Get the column selected
+	if ( ! $(node).is('td') ) {
+		node = $(node).parents('td:eq(0)')[0];
+	}
+	
+	// Get the column area
 	rectangle = dom.getRect( node );
 	
-	var left = rectangle.x + rectangle.w / 2;
+	// This is the left location of the toolbar
+	left = rectangle.x + rectangle.w / 2;
 		
 	// Adjust the location if the toolbar goes past the right side
 	if ( left + $(toolbar).width() - $(toolbar).width() / 2 > editorWidth ) {
@@ -596,13 +1035,7 @@ function _pbsandwich_addColumnToolbar( editor, node ) {
 		top: top,
 		left: left
 	});
-	
-	// Dispatch toolbar show event
-	editor.fire( 'show-toolbar-column', {
-		'editor': editor,
-		'target': $(editor.getBody()).find( '[data-wp-columnselect]' )[0]
-	} );
-}
+});
 
 
 /**
@@ -624,7 +1057,9 @@ function _pbsandwich_removeColumnToolbar( editor ) {
 function _pbsandwich_columns_sprintf( format, etc ) {
     var arg = arguments;
     var i = 1;
-    return format.replace(/%((%)|s)/g, function (m) { return m[2] || arg[i++] })
+    return format.replace(/%((%)|s)/g, function (m) { 
+		return m[2] || arg[ i++ ];
+	});
 }
 
 
@@ -641,7 +1076,7 @@ function _pbsandwich_columns_formContent( content, numColumns ) {
 	var contents = [];
 	
 	var $content = $('<div></div>').html(content);
-	if ( $content.find('table.pbsandwich_column').length == 0 ) {
+	if ( $content.find('table.pbsandwich_column').length === 0 ) {
 		return pbsandwich_column.dummy_content;
 	}
 	
@@ -658,7 +1093,7 @@ function _pbsandwich_columns_formContent( content, numColumns ) {
 					} else {
 						innerHTML = $('<p></p>').html(content);
 					}
-				} catch (e) {
+				} catch (error) {
 					innerHTML = $('<p></p>').html(content);
 				}
 				
@@ -734,7 +1169,7 @@ function _pbsandwich_columns_formTable( columns, content ) {
 			} else {
 				innerHTML = $('<p></p>').html(columnContent);
 			}
-		} catch (e) {
+		} catch (error) {
 			innerHTML = $('<p></p>').html(columnContent);
 		}
 		
@@ -771,6 +1206,7 @@ editor.on('mousedown', function(e) {
 	} else {
 		$(editor.getBody()).removeClass('pbsandwich_column_selected');
 	}
+
 	_pbsandwich_removeColumnToolbar( editor );
 });
 
@@ -780,7 +1216,7 @@ editor.on('mousedown', function(e) {
  */
 editor.on('mouseup', function(e) {
 	var $ = jQuery;
-	if ( $(e.target).is( '[data-column-action]' ) ) {
+	if ( $(e.target).parents('#wp-column-toolbar').length > 0 ) {
 		
 		var action = $(e.target).attr('data-column-action');
 		
@@ -794,6 +1230,12 @@ editor.on('mouseup', function(e) {
 		
 		return;
 	}
+
+	// If an image is clicked, then don't show the column toolbar
+	if ( $(e.target).is('img.alignleft, img.alignright, img.aligncenter, img.alignnone') ) {
+		return;
+	}
+	
 	_pbsandwich_addColumnToolbar( editor, e.target );
 });
 
@@ -807,11 +1249,11 @@ editor.on('init', function(e) {
 	$( editor.getBody() ).on('mousedown', function(e) {
 		
 		// Don't remove the toolbar when the toolbar is clicked
-		if ( $(e.target).is( '[data-column-action]' ) ) {
+		if ( $(e.target).parents('#wp-column-toolbar').length > 0 ) {
 			e.stopPropagation();
 			return;
 		}
-	
+		
 		_pbsandwich_removeColumnToolbar( editor );
 	});
 });
@@ -939,6 +1381,8 @@ editor.on('wp-body-class-change change', function(e) {
  * the column so content can be added
  */
 editor.on('mousedown', function(e) {
+	var $ = jQuery;
+	
 	if ( ! $(e.target).is('.pbsandwich_column td') ) {
 		return;
 	}
@@ -1071,6 +1515,8 @@ editor.on('toolbar-column-clone-row', function(e) {
  * Renders the edit column modal
  */
 editor.on('toolbar-column-edit-area', function(e) {
+	var $ = jQuery;
+	
 	var $selectedColumn = $(editor.getBody()).find('[data-wp-columnselect="1"]');
 	
 	var $innerColumn = $selectedColumn.find('> .inner-column:eq(0)');
@@ -1101,7 +1547,7 @@ editor.on('toolbar-column-edit-area', function(e) {
 		background_repeat: $selectedColumn.css('backgroundRepeat'),
 		background_position: $selectedColumn.css('backgroundPosition')
 	};
-	
+
 	var colModal = editor.windowManager.open( {
 		title: pbsandwich_column.column_settings,
 		body: [{
@@ -1168,6 +1614,14 @@ editor.on('toolbar-column-edit-area', function(e) {
 	$('#pbsandwich_column_area_edit').find('#border_color, #background_color').wpColorPicker();
 	
 	_pbsandwich_removeColumnToolbar( editor );
+	
+	editor.fire( 'pre-modal-create-tabs', {
+		'editor': e.editor,
+		'target': $('#pbsandwich_column_area_edit').parent()[0],
+		'action': e.action,
+		'shortcode': e.shortcode,
+		'origin': e.target
+	} );
 });
 
 /**
@@ -1217,9 +1671,9 @@ jQuery('body').on('click', '.sandwich_modal .image_type', function(e) {
 	
 	frame.on('open',function() {
 		var selection = frame.state().get('selection');
-		ids = imageContainer.find('[id="background_image"]').val().split(',');
+		var ids = imageContainer.find('[id="background_image"]').val().split(',');
 		ids.forEach(function(id) {
-			attachment = wp.media.attachment(id);
+			var attachment = wp.media.attachment(id);
 			attachment.fetch();
 			selection.add( attachment ? [ attachment ] : [] );
 		});
@@ -1232,7 +1686,7 @@ jQuery('body').on('click', '.sandwich_modal .image_type', function(e) {
 		
 			// Get the preview image
 			var image = attachment.attributes.sizes.full;
-			if ( typeof attachment.attributes.sizes.thumbnail != 'undefined' ) {
+			if ( typeof attachment.attributes.sizes.thumbnail !== 'undefined' ) {
 				image = attachment.attributes.sizes.thumbnail;
 			}
 			var url = image.url;
@@ -1344,8 +1798,9 @@ editor.on('toolbar-column-remove-area', function(e) {
  * Column clone area/column toolbar button
  */
 editor.on('toolbar-column-clone-area', function(e) {
+	var $ = jQuery;
+	
 	preUpdateSortable( editor );
-
 	
 	var table = $(editor.getBody()).find('[data-wp-columnselect]').parents('.pbsandwich_column:eq(0)');
 	
@@ -1482,10 +1937,16 @@ editor.on('toolbar-column-clone-area', function(e) {
  * Renders the edit column modal
  */
 editor.on('toolbar-column-edit-row', function(e) {	
+	var $ = jQuery;
+	
 	var $selectedRow = $(editor.getBody()).find('[data-wp-columnselect="1"]').parents('.pbsandwich_column:eq(0)');
 
 	var bgImageURL = $selectedRow.css('background-image').replace( /url\(([^\)]+)\)/g, '$1' );
 
+	var action = e.action,
+		shortcode = e.sortcode,
+		origin = e.target;
+	
 	if ( bgImageURL === 'none' ) {
 		bgImageURL = '';
 	}
@@ -1512,15 +1973,19 @@ editor.on('toolbar-column-edit-row', function(e) {
 		background_image_url: bgImageURL,
 		background_size: $selectedRow.css('backgroundSize'),
 		background_repeat: $selectedRow.css('backgroundRepeat'),
-		background_position: $selectedRow.css('backgroundPosition')
+		background_position: $selectedRow.css('backgroundPosition'),
+		full_width: $selectedRow.attr('data-break-out')
 	};
+
 	//
 	var colModal = editor.windowManager.open( {
 			title: pbsandwich_column.row_settings,
+			height: $(window).height() * .8,
+			width: $(window).width() * .7 > 900 ? 900 : $(window).width() * .7,
 			body: [{
-			type: 'container',
-			html: wp.template( 'pbs-column-row-edit-modal' )( pbsandwich_column )
-		}],
+				type: 'container',
+				html: wp.template( 'pbs-column-row-edit-modal' )( pbsandwich_column )
+			}],
 		/**
 		 * Apply all our new styles on submit
 		 */
@@ -1583,15 +2048,32 @@ editor.on('toolbar-column-edit-row', function(e) {
 			}
 			$selectedRow.css('backgroundImage', img);
 			$selectedRow.attr('data-background-image', form.find('[name="background_image"]').val() );
+			$selectedRow.attr('data-break-out', form.find('[name="full_width"]').val() );
 
 			// Make the styles permanent
 			$selectedRow.attr('data-mce-style', $selectedRow.attr('style'));
+			
+			editor.fire( 'modal-save', {
+				'editor': editor,
+				'target': $selectedRow[0],
+				'action': action,
+				'shortcode': 'row',
+				'origin': origin
+			} );
 		}
 	});
 
 	$('#pbsandwich_column_row_edit').find('#border_color, #background_color').wpColorPicker();
 	
 	_pbsandwich_removeColumnToolbar( editor );
+	
+	editor.fire( 'pre-modal-create-tabs', {
+		'editor': e.editor,
+		'target': $('#pbsandwich_column_row_edit').parent()[0],
+		'action': e.action,
+		'shortcode': e.shortcode,
+		'origin': e.target
+	} );
 });
 
 
@@ -1600,17 +2082,41 @@ editor.on('toolbar-column-edit-row', function(e) {
  * Close the modal window when the enter key is pressed
  */
 jQuery('body').on('keypress', '.sandwich_modal input, .sandwich_modal select', function(e) {
+	var $ = jQuery;
 	if ( e.which === 13 ) {
-		var $ = jQuery;
 		$(this).parents('.mce-window').find('.mce-primary button').trigger('click');
 	}
+});
+
+
+/**
+ * Content alignment buttons
+ */
+editor.on('toolbar-row-align-left', function(e) {
+	var $ = jQuery;
+	$(e.target).removeClass( 'pbs-align-right pbs-align-center' );
+	$(e.target).addClass('pbs-align-left');
+});
+editor.on('toolbar-row-align-center', function(e) {
+	var $ = jQuery;
+	$(e.target).removeClass('pbs-align-left pbs-align-right');
+	$(e.target).addClass('pbs-align-center');	
+});
+editor.on('toolbar-row-align-right', function(e) {
+	var $ = jQuery;
+	$(e.target).removeClass('pbs-align-left pbs-align-center');
+	$(e.target).addClass('pbs-align-right');
+});
+editor.on('toolbar-row-align-none', function(e) {
+	var $ = jQuery;
+	$(e.target).removeClass('pbs-align-left pbs-align-center pbs-align-right');
 });
 
 /**
  * Jetpack Contact Form
  * Make Shortcake's edit button open up Jetpack's Contact Form UI instead
  */
-editor.on('init', function(e) {
+editor.on('init', function() {
 	var $ = jQuery;
 	
 	$( editor.getBody() ).on('mousedown', '[data-wpview-type="contact-form"] .toolbar .edit', function(e) {
@@ -1625,4 +2131,8 @@ editor.on('init', function(e) {
  */
     });
 })();
+
+function _gambit_microtime() {
+	return ( new Date ).getTime() / 1000;
+}
 

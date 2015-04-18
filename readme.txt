@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: page builder, builder, page, visual, editor, column, columns, shortcode, layout, table, nested, composer, build, post
 Requires at least: 4.1
 Tested up to: 4.1.1
-Stable tag: 0.11
+Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,7 @@ The native visual editor page builder. Empower your visual editor with shortcode
 
 == Description ==
 
-= Call it PB Sandwich for short =
+= Visit our website at [pbsandwi.ch](http://pbsandwi.ch). We now have [awesome extensions](http://pbsandwi.ch/downloads) to further empower your page building experience. =
 
 = The page builder that: =
 
@@ -31,6 +31,7 @@ The native visual editor page builder. Empower your visual editor with shortcode
 
 = What can you do with it =
 
+* Content areas with custom background images & colors
 * Create editable, nestable columns
 * Edit text and content using the TinyMCE visual editor like how you normally would
 * Live working preview of embedded content (e.g. put in a YouTube video and you can play it while still being able to drag it)
@@ -65,6 +66,7 @@ We support the following shortcodes, widgets & elements:
 	* If you have Jetpack's Shortcode Embeds module enabled, you can also embed Facebook, Github Gist, Google+, and Medium links
 * Facebook Like Box (Jetpack)
 * Gravatar Profile (Jetpack)
+* Google Map (Jetpack)
 * HTML5 Video - Self-hosted
 * HTML5 Video - Remote-hosted
 * Images (Add Media)
@@ -124,6 +126,10 @@ Report bugs and help out in the code from the [Github repository](https://github
 
 == Frequently Asked Questions ==
 
+= I want more features! =
+
+We now have [awesome extensions](http://pbsandwi.ch/downloads) to further empower your page building experience.
+
 = I just installed Sandwich. Where is it? =
 
 Go ahead and edit a post or page using the visual editor. You might not notice it, but your visual editor is now a page builder *(mic drop)*.
@@ -171,6 +177,21 @@ Take a look at the [Page Builder Sandwich GitHub Repository](https://github.com/
 == Upgrade Notice ==
 
 == Changelog ==
+
+= 1.0 =
+
+* A waaay better dragging and dropping experience
+* Sped up & optimized dragging experience, previously, more content meant more lag when dragging
+* [New Toolbar API](https://github.com/gambitph/Page-Builder-Sandwich/wiki/Adding-Toolbar-Buttons)
+* Added alignment buttons for rows for greater content control, now you can add items side by side
+* Added Jetpack Google Map shortcode (although existing googlemaps shortcodes will not work because of an existing issue)
+* Added clone toolbar button for images
+* Added a page break button in TinyMCE for convenience
+* Security fixes for CWE-200
+* Images now won't make columns wider
+* Fixed video sizes while in the editor
+* Fixed issue where empty paragraph tags were added in the frontend
+* A ton of stability & bug fixes
 
 = 0.11 =
 
