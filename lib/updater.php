@@ -7,7 +7,9 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-require_once( PBS_PATH . 'inc/EDD_SL_Plugin_Updater.php' );
+if ( ! class_exists( 'PBS_EDD_SL_Plugin_Updater' ) ) {
+	require_once( PBS_PATH . 'inc/EDD_SL_Plugin_Updater.php' );
+}
 
 class GambitPBSandwichExtUpdater {
 	
@@ -85,7 +87,7 @@ class GambitPBSandwichExtUpdater {
 			}
 
 			// setup the updater
-			$eddUpdater = new EDD_SL_Plugin_Updater( $extension['store_url'], $extension['file'],
+			$eddUpdater = new PBS_EDD_SL_Plugin_Updater( $extension['store_url'], $extension['file'],
 				array( 
 					'version' => $extension['version'], // current version number
 					'license' => $licenseKey, // license key (used get_option above to retrieve from DB)
