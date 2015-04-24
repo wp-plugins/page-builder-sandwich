@@ -27,18 +27,22 @@ class GambitPBSandwichToolbar {
 	 *            < 0 is to the right of the remove button
 	 * hash - auto generated unique ID
 	 */
-	protected function clearToolbarButtonArgs( $args ) {
+	public function clearToolbarButtonArgs( $args ) {
 		return array(
 			'action' => empty( $args['action'] ) ? '' : $args['action'],
 			'icon' => empty( $args['icon'] ) ? 'dashicons dashicons-edit' : $args['icon'],
 			'label' => empty( $args['label'] ) ? '' : $args['label'],
 			'shortcode' => empty( $args['shortcode'] ) ? '' : $args['shortcode'],
-			'priority' => empty( $args['priority'] ) && (int) $args['priority'] != 0 ? 10 : $args['priority'],
+			'priority' => empty( $args['priority'] ) ? 10 : ( (int) $args['priority'] === 0 ? 10 : $args['priority'] ),
 			'hash' => substr( md5( microtime() ), 0, 8 ),
 		);
 	}
 	
 	public function addToolbars( $columnVars ) {
+		if ( empty( $columnVars ) ) {
+			$columnVars = array();
+		}
+		
 		$toolbarButtons = array();
 		
 		// Allow others to add toolbar buttons
@@ -50,13 +54,16 @@ class GambitPBSandwichToolbar {
 		}
 		
 		// Sort via priority (most to least)
-		usort( $toolbarButtons, function( $a, $b ) {
-		    return $b['priority'] - $a['priority'];
-		});
+		usort( $toolbarButtons, array( $this, 'toolbarPrioritySort' ) );
 		
 		$columnVars['toolbar_buttons'] = $toolbarButtons;
 		
 		return $columnVars;
+	}
+	
+	
+	public function toolbarPrioritySort( $a, $b ) {
+	    return $b['priority'] - $a['priority'];
 	}
 	
 	

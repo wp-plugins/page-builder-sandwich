@@ -97,6 +97,7 @@ class GambitPBSandwichColumns {
         add_filter( 'mce_buttons', array( $this, 'registerTinyMCEButton' ) );
 		
 		$columnVars = array(
+			'wp_version' => get_bloginfo( 'version' ),
 			'dummy_content' => __( 'Column text', 'pbsandwich' ),
 			'modal_title' => __( 'Columns', 'pbsandwich' ),
         	'modal_description' => __( 'Enter a composition here of column ratios separated by spaces.<br>Make sure the ratios sum up to 1.<br>For example: ', 'pbsandwich' ),
@@ -221,7 +222,7 @@ class GambitPBSandwichColumns {
 			$suffix = '_preview';
 		}
 		
-		$styles = get_post_meta( $post->ID, 'pbsandwich_styles' . $suffix, true );
+		$styles = trim( get_post_meta( $post->ID, 'pbsandwich_styles' . $suffix, true ) );
 		if ( empty( $styles ) ) {
 			return;
 		}
@@ -285,7 +286,7 @@ class GambitPBSandwichColumns {
 	 * @param	$content string The content being outputted in the frontend
 	 * @return	string The modified content
 	 */
-	protected function parseColumnContent( $content ) {
+	public function parseColumnContent( $content ) {
 		// simple_html_dom errors out when we don't have any content
 		$contentChecker = trim( $content );
 		if ( empty( $contentChecker ) ) {
@@ -342,6 +343,8 @@ class GambitPBSandwichColumns {
 				// This is to ensure that the spacing remains correct.
 				// @see http://www.htmlhelp.com/reference/html40/inline.html
 				if ( preg_match( '/^<(a|abbr|acronym|b|bdo|big|br|cite|code|dfn|em|i|img|input|kbd|label|q|samp|select|small|span|strong|sub|sup|textarea|tt|var|button|del|ins|map|object|script)[^>]+>/', $innerHTML ) === 1 ) {
+					$innerHTML = '<p>' . $innerHTML . '</p>';
+				} else if ( preg_match( '/^</', $innerHTML ) === 0 ) {
 					$innerHTML = '<p>' . $innerHTML . '</p>';
 				}
 				

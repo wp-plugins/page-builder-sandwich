@@ -3,7 +3,7 @@
 * Plugin Name: Page Builder Sandwich
 * Plugin URI: https://github.com/gambitph/Page-Builder-Sandwich
 * Description: The native visual editor page builder. Empower your visual editor with drag and drop & column capabilities.
-* Version: 1.0.2
+* Version: 1.1
 * Author: Benjamin Intal - Gambit Technologies Inc
 * Author URI: http://gambit.ph
 * License: GPL2
@@ -11,18 +11,11 @@
 * Domain Path: /languages
 */
 
-/**
- * NOTES WHEN UPDATING SHORTCAKE:
- * 1. Only include the final files, no need to include tests, dev files, etc
- * 2. Add this on the main script: if ( ! defined( 'ABSPATH' ) ) exit;
- * 3. Remove the plugin header to prevent activation errors
- */
-
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 // Used for tracking the version used
-defined( 'PBS_VERSION' ) or define( 'PBS_VERSION', '1.0.2' );
+defined( 'PBS_VERSION' ) or define( 'PBS_VERSION', '1.1' );
 
 // Used for file includes
 defined( 'PBS_PATH' ) or define( 'PBS_PATH', trailingslashit( dirname( __FILE__ ) ) );
@@ -36,6 +29,7 @@ require_once( PBS_PATH . 'lib/shortcake.php' );
 require_once( PBS_PATH . 'lib/functions.php' );
 require_once( PBS_PATH . 'lib/toolbar.php' );
 require_once( PBS_PATH . 'lib/updater.php' );
+require_once( PBS_PATH . 'lib/extension-ads.php' );
 
 // General list of shortcakes available to PB Sandwich. They include integrations from 3rd party plugins.
 require_once( PBS_PATH . 'lib/shortcode/hello-dolly.php' );

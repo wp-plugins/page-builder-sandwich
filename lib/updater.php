@@ -28,7 +28,7 @@ class GambitPBSandwichExtUpdater {
 	 * 	'ssl' => boolean Whether to use SSL for authentication
 	 * 	'url' => string The extension's home url, for linking purposes
 	 */
-	protected $extensions;
+	public $extensions;
 	
 	function __construct() {
 		add_action( 'admin_init', array( $this, 'checkForUpdates' ), 2 );
@@ -51,6 +51,9 @@ class GambitPBSandwichExtUpdater {
 		// Generate a slug for the extension to be used for admin pages
 		$this->extensions = array();
 		foreach ( $extensions as $key => $extension ) {
+			if ( empty( $extension['name'] ) || empty( $extension['file'] ) || empty( $extension['store_url'] ) ) {
+				continue;
+			}
 			$extension['slug'] = strtolower( str_replace( ' ', '_', $extension[ 'name' ] ) );
 			$extension['ssl'] = ! isset( $extension['ssl'] ) ? false : $extension['ssl'];
 			$this->extensions[ $extension['slug'] ] = $extension;
@@ -58,6 +61,8 @@ class GambitPBSandwichExtUpdater {
 		
 		// Sort by name
 		ksort( $this->extensions );
+			
+		return apply_filters( 'pbs_updater_gather_extensions', $this->extensions );
 	}
 	
 	
@@ -253,7 +258,7 @@ class GambitPBSandwichExtUpdater {
 				);
 				
 				// Call the license validation API
-				$response = wp_remote_get( add_query_arg( $apiParams, $extension['store_url'] ), array( 'timeout' => 15, 'sslverify' => $extension['ssl'] ) );
+				$response = wp_remote_get( esc_url_raw( add_query_arg( $apiParams, $extension['store_url'] ) ), array( 'timeout' => 15, 'sslverify' => $extension['ssl'] ) );
 
 				// make sure the response came back okay
 				if ( is_wp_error( $response ) ) {
