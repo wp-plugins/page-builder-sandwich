@@ -1,0 +1,864 @@
+/**
+ * Some of our shortcodes use bootstrap, use them also in the editor to get a nice display
+ */
+body#tinymce.wp-editor .sandwich .btn {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.428571429;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+  body#tinymce.wp-editor .sandwich .btn:focus, body#tinymce.wp-editor .sandwich .btn.focus, body#tinymce.wp-editor .sandwich .btn:active:focus, body#tinymce.wp-editor .sandwich .btn:active.focus, body#tinymce.wp-editor .sandwich .btn.active:focus, body#tinymce.wp-editor .sandwich .btn.active.focus {
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px; }
+  body#tinymce.wp-editor .sandwich .btn:hover, body#tinymce.wp-editor .sandwich .btn:focus, body#tinymce.wp-editor .sandwich .btn.focus {
+    color: #333;
+    text-decoration: none; }
+  body#tinymce.wp-editor .sandwich .btn:active, body#tinymce.wp-editor .sandwich .btn.active {
+    outline: 0;
+    background-image: none;
+    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125); }
+  body#tinymce.wp-editor .sandwich .btn.disabled, body#tinymce.wp-editor .sandwich .btn[disabled], fieldset[disabled] body#tinymce.wp-editor .sandwich .btn {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.65;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none; }
+body#tinymce.wp-editor .sandwich .btn-default {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc; }
+  body#tinymce.wp-editor .sandwich .btn-default:hover, body#tinymce.wp-editor .sandwich .btn-default:focus, body#tinymce.wp-editor .sandwich .btn-default.focus, body#tinymce.wp-editor .sandwich .btn-default:active, body#tinymce.wp-editor .sandwich .btn-default.active, .open > body#tinymce.wp-editor .sandwich .btn-default.dropdown-toggle {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad; }
+  body#tinymce.wp-editor .sandwich .btn-default:active, body#tinymce.wp-editor .sandwich .btn-default.active, .open > body#tinymce.wp-editor .sandwich .btn-default.dropdown-toggle {
+    background-image: none; }
+  body#tinymce.wp-editor .sandwich .btn-default.disabled, body#tinymce.wp-editor .sandwich .btn-default.disabled:hover, body#tinymce.wp-editor .sandwich .btn-default.disabled:focus, body#tinymce.wp-editor .sandwich .btn-default.disabled.focus, body#tinymce.wp-editor .sandwich .btn-default.disabled:active, body#tinymce.wp-editor .sandwich .btn-default.disabled.active, body#tinymce.wp-editor .sandwich .btn-default[disabled], body#tinymce.wp-editor .sandwich .btn-default[disabled]:hover, body#tinymce.wp-editor .sandwich .btn-default[disabled]:focus, body#tinymce.wp-editor .sandwich .btn-default[disabled].focus, body#tinymce.wp-editor .sandwich .btn-default[disabled]:active, body#tinymce.wp-editor .sandwich .btn-default[disabled].active, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-default, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-default:hover, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-default:focus, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-default.focus, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-default:active, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-default.active {
+    background-color: #fff;
+    border-color: #ccc; }
+  body#tinymce.wp-editor .sandwich .btn-default .badge {
+    color: #fff;
+    background-color: #333; }
+body#tinymce.wp-editor .sandwich .btn-primary {
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #2e6da4; }
+  body#tinymce.wp-editor .sandwich .btn-primary:hover, body#tinymce.wp-editor .sandwich .btn-primary:focus, body#tinymce.wp-editor .sandwich .btn-primary.focus, body#tinymce.wp-editor .sandwich .btn-primary:active, body#tinymce.wp-editor .sandwich .btn-primary.active, .open > body#tinymce.wp-editor .sandwich .btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #286090;
+    border-color: #204d74; }
+  body#tinymce.wp-editor .sandwich .btn-primary:active, body#tinymce.wp-editor .sandwich .btn-primary.active, .open > body#tinymce.wp-editor .sandwich .btn-primary.dropdown-toggle {
+    background-image: none; }
+  body#tinymce.wp-editor .sandwich .btn-primary.disabled, body#tinymce.wp-editor .sandwich .btn-primary.disabled:hover, body#tinymce.wp-editor .sandwich .btn-primary.disabled:focus, body#tinymce.wp-editor .sandwich .btn-primary.disabled.focus, body#tinymce.wp-editor .sandwich .btn-primary.disabled:active, body#tinymce.wp-editor .sandwich .btn-primary.disabled.active, body#tinymce.wp-editor .sandwich .btn-primary[disabled], body#tinymce.wp-editor .sandwich .btn-primary[disabled]:hover, body#tinymce.wp-editor .sandwich .btn-primary[disabled]:focus, body#tinymce.wp-editor .sandwich .btn-primary[disabled].focus, body#tinymce.wp-editor .sandwich .btn-primary[disabled]:active, body#tinymce.wp-editor .sandwich .btn-primary[disabled].active, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-primary, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-primary:hover, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-primary:focus, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-primary.focus, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-primary:active, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-primary.active {
+    background-color: #337ab7;
+    border-color: #2e6da4; }
+  body#tinymce.wp-editor .sandwich .btn-primary .badge {
+    color: #337ab7;
+    background-color: #fff; }
+body#tinymce.wp-editor .sandwich .btn-success {
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #4cae4c; }
+  body#tinymce.wp-editor .sandwich .btn-success:hover, body#tinymce.wp-editor .sandwich .btn-success:focus, body#tinymce.wp-editor .sandwich .btn-success.focus, body#tinymce.wp-editor .sandwich .btn-success:active, body#tinymce.wp-editor .sandwich .btn-success.active, .open > body#tinymce.wp-editor .sandwich .btn-success.dropdown-toggle {
+    color: #fff;
+    background-color: #449d44;
+    border-color: #398439; }
+  body#tinymce.wp-editor .sandwich .btn-success:active, body#tinymce.wp-editor .sandwich .btn-success.active, .open > body#tinymce.wp-editor .sandwich .btn-success.dropdown-toggle {
+    background-image: none; }
+  body#tinymce.wp-editor .sandwich .btn-success.disabled, body#tinymce.wp-editor .sandwich .btn-success.disabled:hover, body#tinymce.wp-editor .sandwich .btn-success.disabled:focus, body#tinymce.wp-editor .sandwich .btn-success.disabled.focus, body#tinymce.wp-editor .sandwich .btn-success.disabled:active, body#tinymce.wp-editor .sandwich .btn-success.disabled.active, body#tinymce.wp-editor .sandwich .btn-success[disabled], body#tinymce.wp-editor .sandwich .btn-success[disabled]:hover, body#tinymce.wp-editor .sandwich .btn-success[disabled]:focus, body#tinymce.wp-editor .sandwich .btn-success[disabled].focus, body#tinymce.wp-editor .sandwich .btn-success[disabled]:active, body#tinymce.wp-editor .sandwich .btn-success[disabled].active, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-success, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-success:hover, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-success:focus, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-success.focus, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-success:active, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-success.active {
+    background-color: #5cb85c;
+    border-color: #4cae4c; }
+  body#tinymce.wp-editor .sandwich .btn-success .badge {
+    color: #5cb85c;
+    background-color: #fff; }
+body#tinymce.wp-editor .sandwich .btn-info {
+  color: #fff;
+  background-color: #5bc0de;
+  border-color: #46b8da; }
+  body#tinymce.wp-editor .sandwich .btn-info:hover, body#tinymce.wp-editor .sandwich .btn-info:focus, body#tinymce.wp-editor .sandwich .btn-info.focus, body#tinymce.wp-editor .sandwich .btn-info:active, body#tinymce.wp-editor .sandwich .btn-info.active, .open > body#tinymce.wp-editor .sandwich .btn-info.dropdown-toggle {
+    color: #fff;
+    background-color: #31b0d5;
+    border-color: #269abc; }
+  body#tinymce.wp-editor .sandwich .btn-info:active, body#tinymce.wp-editor .sandwich .btn-info.active, .open > body#tinymce.wp-editor .sandwich .btn-info.dropdown-toggle {
+    background-image: none; }
+  body#tinymce.wp-editor .sandwich .btn-info.disabled, body#tinymce.wp-editor .sandwich .btn-info.disabled:hover, body#tinymce.wp-editor .sandwich .btn-info.disabled:focus, body#tinymce.wp-editor .sandwich .btn-info.disabled.focus, body#tinymce.wp-editor .sandwich .btn-info.disabled:active, body#tinymce.wp-editor .sandwich .btn-info.disabled.active, body#tinymce.wp-editor .sandwich .btn-info[disabled], body#tinymce.wp-editor .sandwich .btn-info[disabled]:hover, body#tinymce.wp-editor .sandwich .btn-info[disabled]:focus, body#tinymce.wp-editor .sandwich .btn-info[disabled].focus, body#tinymce.wp-editor .sandwich .btn-info[disabled]:active, body#tinymce.wp-editor .sandwich .btn-info[disabled].active, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-info, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-info:hover, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-info:focus, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-info.focus, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-info:active, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-info.active {
+    background-color: #5bc0de;
+    border-color: #46b8da; }
+  body#tinymce.wp-editor .sandwich .btn-info .badge {
+    color: #5bc0de;
+    background-color: #fff; }
+body#tinymce.wp-editor .sandwich .btn-warning {
+  color: #fff;
+  background-color: #f0ad4e;
+  border-color: #eea236; }
+  body#tinymce.wp-editor .sandwich .btn-warning:hover, body#tinymce.wp-editor .sandwich .btn-warning:focus, body#tinymce.wp-editor .sandwich .btn-warning.focus, body#tinymce.wp-editor .sandwich .btn-warning:active, body#tinymce.wp-editor .sandwich .btn-warning.active, .open > body#tinymce.wp-editor .sandwich .btn-warning.dropdown-toggle {
+    color: #fff;
+    background-color: #ec971f;
+    border-color: #d58512; }
+  body#tinymce.wp-editor .sandwich .btn-warning:active, body#tinymce.wp-editor .sandwich .btn-warning.active, .open > body#tinymce.wp-editor .sandwich .btn-warning.dropdown-toggle {
+    background-image: none; }
+  body#tinymce.wp-editor .sandwich .btn-warning.disabled, body#tinymce.wp-editor .sandwich .btn-warning.disabled:hover, body#tinymce.wp-editor .sandwich .btn-warning.disabled:focus, body#tinymce.wp-editor .sandwich .btn-warning.disabled.focus, body#tinymce.wp-editor .sandwich .btn-warning.disabled:active, body#tinymce.wp-editor .sandwich .btn-warning.disabled.active, body#tinymce.wp-editor .sandwich .btn-warning[disabled], body#tinymce.wp-editor .sandwich .btn-warning[disabled]:hover, body#tinymce.wp-editor .sandwich .btn-warning[disabled]:focus, body#tinymce.wp-editor .sandwich .btn-warning[disabled].focus, body#tinymce.wp-editor .sandwich .btn-warning[disabled]:active, body#tinymce.wp-editor .sandwich .btn-warning[disabled].active, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-warning, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-warning:hover, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-warning:focus, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-warning.focus, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-warning:active, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-warning.active {
+    background-color: #f0ad4e;
+    border-color: #eea236; }
+  body#tinymce.wp-editor .sandwich .btn-warning .badge {
+    color: #f0ad4e;
+    background-color: #fff; }
+body#tinymce.wp-editor .sandwich .btn-danger {
+  color: #fff;
+  background-color: #d9534f;
+  border-color: #d43f3a; }
+  body#tinymce.wp-editor .sandwich .btn-danger:hover, body#tinymce.wp-editor .sandwich .btn-danger:focus, body#tinymce.wp-editor .sandwich .btn-danger.focus, body#tinymce.wp-editor .sandwich .btn-danger:active, body#tinymce.wp-editor .sandwich .btn-danger.active, .open > body#tinymce.wp-editor .sandwich .btn-danger.dropdown-toggle {
+    color: #fff;
+    background-color: #c9302c;
+    border-color: #ac2925; }
+  body#tinymce.wp-editor .sandwich .btn-danger:active, body#tinymce.wp-editor .sandwich .btn-danger.active, .open > body#tinymce.wp-editor .sandwich .btn-danger.dropdown-toggle {
+    background-image: none; }
+  body#tinymce.wp-editor .sandwich .btn-danger.disabled, body#tinymce.wp-editor .sandwich .btn-danger.disabled:hover, body#tinymce.wp-editor .sandwich .btn-danger.disabled:focus, body#tinymce.wp-editor .sandwich .btn-danger.disabled.focus, body#tinymce.wp-editor .sandwich .btn-danger.disabled:active, body#tinymce.wp-editor .sandwich .btn-danger.disabled.active, body#tinymce.wp-editor .sandwich .btn-danger[disabled], body#tinymce.wp-editor .sandwich .btn-danger[disabled]:hover, body#tinymce.wp-editor .sandwich .btn-danger[disabled]:focus, body#tinymce.wp-editor .sandwich .btn-danger[disabled].focus, body#tinymce.wp-editor .sandwich .btn-danger[disabled]:active, body#tinymce.wp-editor .sandwich .btn-danger[disabled].active, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-danger, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-danger:hover, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-danger:focus, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-danger.focus, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-danger:active, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-danger.active {
+    background-color: #d9534f;
+    border-color: #d43f3a; }
+  body#tinymce.wp-editor .sandwich .btn-danger .badge {
+    color: #d9534f;
+    background-color: #fff; }
+body#tinymce.wp-editor .sandwich .btn-link {
+  color: #337ab7;
+  font-weight: normal;
+  border-radius: 0; }
+  body#tinymce.wp-editor .sandwich .btn-link, body#tinymce.wp-editor .sandwich .btn-link:active, body#tinymce.wp-editor .sandwich .btn-link.active, body#tinymce.wp-editor .sandwich .btn-link[disabled], fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-link {
+    background-color: transparent;
+    -webkit-box-shadow: none;
+    box-shadow: none; }
+  body#tinymce.wp-editor .sandwich .btn-link, body#tinymce.wp-editor .sandwich .btn-link:hover, body#tinymce.wp-editor .sandwich .btn-link:focus, body#tinymce.wp-editor .sandwich .btn-link:active {
+    border-color: transparent; }
+  body#tinymce.wp-editor .sandwich .btn-link:hover, body#tinymce.wp-editor .sandwich .btn-link:focus {
+    color: #23527c;
+    text-decoration: underline;
+    background-color: transparent; }
+  body#tinymce.wp-editor .sandwich .btn-link[disabled]:hover, body#tinymce.wp-editor .sandwich .btn-link[disabled]:focus, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-link:hover, fieldset[disabled] body#tinymce.wp-editor .sandwich .btn-link:focus {
+    color: #777777;
+    text-decoration: none; }
+body#tinymce.wp-editor .sandwich .btn-lg {
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.3333333;
+  border-radius: 6px; }
+body#tinymce.wp-editor .sandwich .btn-sm {
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px; }
+body#tinymce.wp-editor .sandwich .btn-xs {
+  padding: 1px 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px; }
+body#tinymce.wp-editor .sandwich .btn-block {
+  display: block;
+  width: 100%; }
+body#tinymce.wp-editor .sandwich .btn-block + .btn-block {
+  margin-top: 5px; }
+body#tinymce.wp-editor .sandwich input[type="submit"].btn-block,
+body#tinymce.wp-editor .sandwich input[type="reset"].btn-block,
+body#tinymce.wp-editor .sandwich input[type="button"].btn-block {
+  width: 100%; }
+body#tinymce.wp-editor .sandwich .panel {
+  margin-bottom: 20px;
+  background-color: #fff;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); }
+body#tinymce.wp-editor .sandwich .panel-body {
+  padding: 15px; }
+  body#tinymce.wp-editor .sandwich .panel-body:before, body#tinymce.wp-editor .sandwich .panel-body:after {
+    content: " ";
+    display: table; }
+  body#tinymce.wp-editor .sandwich .panel-body:after {
+    clear: both; }
+body#tinymce.wp-editor .sandwich .panel-heading {
+  padding: 10px 15px;
+  border-bottom: 1px solid transparent;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px; }
+  body#tinymce.wp-editor .sandwich .panel-heading > .dropdown .dropdown-toggle {
+    color: inherit; }
+body#tinymce.wp-editor .sandwich .panel-title {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 16px;
+  color: inherit; }
+  body#tinymce.wp-editor .sandwich .panel-title > a,
+  body#tinymce.wp-editor .sandwich .panel-title > small,
+  body#tinymce.wp-editor .sandwich .panel-title > .small,
+  body#tinymce.wp-editor .sandwich .panel-title > small > a,
+  body#tinymce.wp-editor .sandwich .panel-title > .small > a {
+    color: inherit; }
+body#tinymce.wp-editor .sandwich .panel-footer {
+  padding: 10px 15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #ddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px; }
+body#tinymce.wp-editor .sandwich .panel > .list-group,
+body#tinymce.wp-editor .sandwich .panel > .panel-collapse > .list-group {
+  margin-bottom: 0; }
+  body#tinymce.wp-editor .sandwich .panel > .list-group .list-group-item,
+  body#tinymce.wp-editor .sandwich .panel > .panel-collapse > .list-group .list-group-item {
+    border-width: 1px 0;
+    border-radius: 0; }
+  body#tinymce.wp-editor .sandwich .panel > .list-group:first-child .list-group-item:first-child,
+  body#tinymce.wp-editor .sandwich .panel > .panel-collapse > .list-group:first-child .list-group-item:first-child {
+    border-top: 0;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px; }
+  body#tinymce.wp-editor .sandwich .panel > .list-group:last-child .list-group-item:last-child,
+  body#tinymce.wp-editor .sandwich .panel > .panel-collapse > .list-group:last-child .list-group-item:last-child {
+    border-bottom: 0;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px; }
+body#tinymce.wp-editor .sandwich .panel-heading + .list-group .list-group-item:first-child {
+  border-top-width: 0; }
+body#tinymce.wp-editor .sandwich .list-group + .panel-footer {
+  border-top-width: 0; }
+body#tinymce.wp-editor .sandwich .panel > .table,
+body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table,
+body#tinymce.wp-editor .sandwich .panel > .panel-collapse > .table {
+  margin-bottom: 0; }
+  body#tinymce.wp-editor .sandwich .panel > .table caption,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table caption,
+  body#tinymce.wp-editor .sandwich .panel > .panel-collapse > .table caption {
+    padding-left: 15px;
+    padding-right: 15px; }
+body#tinymce.wp-editor .sandwich .panel > .table:first-child,
+body#tinymce.wp-editor .sandwich .panel > .table-responsive:first-child > .table:first-child {
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px; }
+  body#tinymce.wp-editor .sandwich .panel > .table:first-child > thead:first-child > tr:first-child,
+  body#tinymce.wp-editor .sandwich .panel > .table:first-child > tbody:first-child > tr:first-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child {
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px; }
+    body#tinymce.wp-editor .sandwich .panel > .table:first-child > thead:first-child > tr:first-child td:first-child,
+    body#tinymce.wp-editor .sandwich .panel > .table:first-child > thead:first-child > tr:first-child th:first-child,
+    body#tinymce.wp-editor .sandwich .panel > .table:first-child > tbody:first-child > tr:first-child td:first-child,
+    body#tinymce.wp-editor .sandwich .panel > .table:first-child > tbody:first-child > tr:first-child th:first-child,
+    body#tinymce.wp-editor .sandwich .panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child td:first-child,
+    body#tinymce.wp-editor .sandwich .panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child th:first-child,
+    body#tinymce.wp-editor .sandwich .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child td:first-child,
+    body#tinymce.wp-editor .sandwich .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child th:first-child {
+      border-top-left-radius: 3px; }
+    body#tinymce.wp-editor .sandwich .panel > .table:first-child > thead:first-child > tr:first-child td:last-child,
+    body#tinymce.wp-editor .sandwich .panel > .table:first-child > thead:first-child > tr:first-child th:last-child,
+    body#tinymce.wp-editor .sandwich .panel > .table:first-child > tbody:first-child > tr:first-child td:last-child,
+    body#tinymce.wp-editor .sandwich .panel > .table:first-child > tbody:first-child > tr:first-child th:last-child,
+    body#tinymce.wp-editor .sandwich .panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child td:last-child,
+    body#tinymce.wp-editor .sandwich .panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child th:last-child,
+    body#tinymce.wp-editor .sandwich .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child td:last-child,
+    body#tinymce.wp-editor .sandwich .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child th:last-child {
+      border-top-right-radius: 3px; }
+body#tinymce.wp-editor .sandwich .panel > .table:last-child,
+body#tinymce.wp-editor .sandwich .panel > .table-responsive:last-child > .table:last-child {
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px; }
+  body#tinymce.wp-editor .sandwich .panel > .table:last-child > tbody:last-child > tr:last-child,
+  body#tinymce.wp-editor .sandwich .panel > .table:last-child > tfoot:last-child > tr:last-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px; }
+    body#tinymce.wp-editor .sandwich .panel > .table:last-child > tbody:last-child > tr:last-child td:first-child,
+    body#tinymce.wp-editor .sandwich .panel > .table:last-child > tbody:last-child > tr:last-child th:first-child,
+    body#tinymce.wp-editor .sandwich .panel > .table:last-child > tfoot:last-child > tr:last-child td:first-child,
+    body#tinymce.wp-editor .sandwich .panel > .table:last-child > tfoot:last-child > tr:last-child th:first-child,
+    body#tinymce.wp-editor .sandwich .panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child td:first-child,
+    body#tinymce.wp-editor .sandwich .panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child th:first-child,
+    body#tinymce.wp-editor .sandwich .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child td:first-child,
+    body#tinymce.wp-editor .sandwich .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child th:first-child {
+      border-bottom-left-radius: 3px; }
+    body#tinymce.wp-editor .sandwich .panel > .table:last-child > tbody:last-child > tr:last-child td:last-child,
+    body#tinymce.wp-editor .sandwich .panel > .table:last-child > tbody:last-child > tr:last-child th:last-child,
+    body#tinymce.wp-editor .sandwich .panel > .table:last-child > tfoot:last-child > tr:last-child td:last-child,
+    body#tinymce.wp-editor .sandwich .panel > .table:last-child > tfoot:last-child > tr:last-child th:last-child,
+    body#tinymce.wp-editor .sandwich .panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child td:last-child,
+    body#tinymce.wp-editor .sandwich .panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child th:last-child,
+    body#tinymce.wp-editor .sandwich .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child td:last-child,
+    body#tinymce.wp-editor .sandwich .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child th:last-child {
+      border-bottom-right-radius: 3px; }
+body#tinymce.wp-editor .sandwich .panel > .panel-body + .table,
+body#tinymce.wp-editor .sandwich .panel > .panel-body + .table-responsive,
+body#tinymce.wp-editor .sandwich .panel > .table + .panel-body,
+body#tinymce.wp-editor .sandwich .panel > .table-responsive + .panel-body {
+  border-top: 1px solid #ddd; }
+body#tinymce.wp-editor .sandwich .panel > .table > tbody:first-child > tr:first-child th,
+body#tinymce.wp-editor .sandwich .panel > .table > tbody:first-child > tr:first-child td {
+  border-top: 0; }
+body#tinymce.wp-editor .sandwich .panel > .table-bordered,
+body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered {
+  border: 0; }
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > thead > tr > th:first-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > thead > tr > td:first-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > tbody > tr > th:first-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > tbody > tr > td:first-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > tfoot > tr > th:first-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > tfoot > tr > td:first-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > thead > tr > th:first-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > thead > tr > td:first-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > tbody > tr > th:first-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > tbody > tr > td:first-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > tfoot > tr > th:first-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > tfoot > tr > td:first-child {
+    border-left: 0; }
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > thead > tr > th:last-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > thead > tr > td:last-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > tbody > tr > th:last-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > tbody > tr > td:last-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > tfoot > tr > th:last-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > tfoot > tr > td:last-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > thead > tr > th:last-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > thead > tr > td:last-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > tbody > tr > th:last-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > tbody > tr > td:last-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > tfoot > tr > th:last-child,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > tfoot > tr > td:last-child {
+    border-right: 0; }
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > thead > tr:first-child > td,
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > thead > tr:first-child > th,
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > tbody > tr:first-child > td,
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > tbody > tr:first-child > th,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > thead > tr:first-child > td,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > thead > tr:first-child > th,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > tbody > tr:first-child > td,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > tbody > tr:first-child > th {
+    border-bottom: 0; }
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > tbody > tr:last-child > td,
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > tbody > tr:last-child > th,
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > tfoot > tr:last-child > td,
+  body#tinymce.wp-editor .sandwich .panel > .table-bordered > tfoot > tr:last-child > th,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > tbody > tr:last-child > td,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > tbody > tr:last-child > th,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > tfoot > tr:last-child > td,
+  body#tinymce.wp-editor .sandwich .panel > .table-responsive > .table-bordered > tfoot > tr:last-child > th {
+    border-bottom: 0; }
+body#tinymce.wp-editor .sandwich .panel > .table-responsive {
+  border: 0;
+  margin-bottom: 0; }
+body#tinymce.wp-editor .sandwich .panel-group {
+  margin-bottom: 20px; }
+  body#tinymce.wp-editor .sandwich .panel-group .panel {
+    margin-bottom: 0;
+    border-radius: 4px; }
+    body#tinymce.wp-editor .sandwich .panel-group .panel + .panel {
+      margin-top: 5px; }
+  body#tinymce.wp-editor .sandwich .panel-group .panel-heading {
+    border-bottom: 0; }
+    body#tinymce.wp-editor .sandwich .panel-group .panel-heading + .panel-collapse > .panel-body,
+    body#tinymce.wp-editor .sandwich .panel-group .panel-heading + .panel-collapse > .list-group {
+      border-top: 1px solid #ddd; }
+  body#tinymce.wp-editor .sandwich .panel-group .panel-footer {
+    border-top: 0; }
+    body#tinymce.wp-editor .sandwich .panel-group .panel-footer + .panel-collapse .panel-body {
+      border-bottom: 1px solid #ddd; }
+body#tinymce.wp-editor .sandwich .panel-default {
+  border-color: #ddd; }
+  body#tinymce.wp-editor .sandwich .panel-default > .panel-heading {
+    color: #333333;
+    background-color: #f5f5f5;
+    border-color: #ddd; }
+    body#tinymce.wp-editor .sandwich .panel-default > .panel-heading + .panel-collapse > .panel-body {
+      border-top-color: #ddd; }
+    body#tinymce.wp-editor .sandwich .panel-default > .panel-heading .badge {
+      color: #f5f5f5;
+      background-color: #333333; }
+  body#tinymce.wp-editor .sandwich .panel-default > .panel-footer + .panel-collapse > .panel-body {
+    border-bottom-color: #ddd; }
+body#tinymce.wp-editor .sandwich .panel-primary {
+  border-color: #337ab7; }
+  body#tinymce.wp-editor .sandwich .panel-primary > .panel-heading {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #337ab7; }
+    body#tinymce.wp-editor .sandwich .panel-primary > .panel-heading + .panel-collapse > .panel-body {
+      border-top-color: #337ab7; }
+    body#tinymce.wp-editor .sandwich .panel-primary > .panel-heading .badge {
+      color: #337ab7;
+      background-color: #fff; }
+  body#tinymce.wp-editor .sandwich .panel-primary > .panel-footer + .panel-collapse > .panel-body {
+    border-bottom-color: #337ab7; }
+body#tinymce.wp-editor .sandwich .panel-success {
+  border-color: #d6e9c6; }
+  body#tinymce.wp-editor .sandwich .panel-success > .panel-heading {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6; }
+    body#tinymce.wp-editor .sandwich .panel-success > .panel-heading + .panel-collapse > .panel-body {
+      border-top-color: #d6e9c6; }
+    body#tinymce.wp-editor .sandwich .panel-success > .panel-heading .badge {
+      color: #dff0d8;
+      background-color: #3c763d; }
+  body#tinymce.wp-editor .sandwich .panel-success > .panel-footer + .panel-collapse > .panel-body {
+    border-bottom-color: #d6e9c6; }
+body#tinymce.wp-editor .sandwich .panel-info {
+  border-color: #bce8f1; }
+  body#tinymce.wp-editor .sandwich .panel-info > .panel-heading {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1; }
+    body#tinymce.wp-editor .sandwich .panel-info > .panel-heading + .panel-collapse > .panel-body {
+      border-top-color: #bce8f1; }
+    body#tinymce.wp-editor .sandwich .panel-info > .panel-heading .badge {
+      color: #d9edf7;
+      background-color: #31708f; }
+  body#tinymce.wp-editor .sandwich .panel-info > .panel-footer + .panel-collapse > .panel-body {
+    border-bottom-color: #bce8f1; }
+body#tinymce.wp-editor .sandwich .panel-warning {
+  border-color: #faebcc; }
+  body#tinymce.wp-editor .sandwich .panel-warning > .panel-heading {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #faebcc; }
+    body#tinymce.wp-editor .sandwich .panel-warning > .panel-heading + .panel-collapse > .panel-body {
+      border-top-color: #faebcc; }
+    body#tinymce.wp-editor .sandwich .panel-warning > .panel-heading .badge {
+      color: #fcf8e3;
+      background-color: #8a6d3b; }
+  body#tinymce.wp-editor .sandwich .panel-warning > .panel-footer + .panel-collapse > .panel-body {
+    border-bottom-color: #faebcc; }
+body#tinymce.wp-editor .sandwich .panel-danger {
+  border-color: #ebccd1; }
+  body#tinymce.wp-editor .sandwich .panel-danger > .panel-heading {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1; }
+    body#tinymce.wp-editor .sandwich .panel-danger > .panel-heading + .panel-collapse > .panel-body {
+      border-top-color: #ebccd1; }
+    body#tinymce.wp-editor .sandwich .panel-danger > .panel-heading .badge {
+      color: #f2dede;
+      background-color: #a94442; }
+  body#tinymce.wp-editor .sandwich .panel-danger > .panel-footer + .panel-collapse > .panel-body {
+    border-bottom-color: #ebccd1; }
+@-webkit-keyframes progress-bar-stripes {
+  from {
+    background-position: 40px 0; }
+  to {
+    background-position: 0 0; } }
+@keyframes progress-bar-stripes {
+  from {
+    background-position: 40px 0; }
+  to {
+    background-position: 0 0; } }
+body#tinymce.wp-editor .sandwich .progress {
+  overflow: hidden;
+  height: 20px;
+  margin-bottom: 20px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1); }
+body#tinymce.wp-editor .sandwich .progress-bar {
+  float: left;
+  width: 0%;
+  height: 100%;
+  font-size: 12px;
+  line-height: 20px;
+  color: #fff;
+  text-align: center;
+  background-color: #337ab7;
+  -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  -webkit-transition: width 0.6s ease;
+  -o-transition: width 0.6s ease;
+  transition: width 0.6s ease; }
+body#tinymce.wp-editor .sandwich .progress-striped .progress-bar,
+body#tinymce.wp-editor .sandwich .progress-bar-striped {
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-size: 40px 40px; }
+body#tinymce.wp-editor .sandwich .progress.active .progress-bar,
+body#tinymce.wp-editor .sandwich .progress-bar.active {
+  -webkit-animation: progress-bar-stripes 2s linear infinite;
+  -o-animation: progress-bar-stripes 2s linear infinite;
+  animation: progress-bar-stripes 2s linear infinite; }
+body#tinymce.wp-editor .sandwich .progress-bar-success {
+  background-color: #5cb85c; }
+  .progress-striped body#tinymce.wp-editor .sandwich .progress-bar-success {
+    background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent); }
+body#tinymce.wp-editor .sandwich .progress-bar-info {
+  background-color: #5bc0de; }
+  .progress-striped body#tinymce.wp-editor .sandwich .progress-bar-info {
+    background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent); }
+body#tinymce.wp-editor .sandwich .progress-bar-warning {
+  background-color: #f0ad4e; }
+  .progress-striped body#tinymce.wp-editor .sandwich .progress-bar-warning {
+    background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent); }
+body#tinymce.wp-editor .sandwich .progress-bar-danger {
+  background-color: #d9534f; }
+  .progress-striped body#tinymce.wp-editor .sandwich .progress-bar-danger {
+    background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent); }
+
+.sandwich.pbs_button {
+  box-sizing: border-box;
+  text-decoration: none;
+  text-align: center; }
+  .sandwich.pbs_button a, .sandwich.pbs_button a:hover, .sandwich.pbs_button a:link, .sandwich.pbs_button a:link:hover, .sandwich.pbs_button a:visited, .sandwich.pbs_button a:visited:hover {
+    text-decoration: none; }
+  .sandwich.pbs_button.pbs_button_align_left {
+    text-align: left; }
+  .sandwich.pbs_button.pbs_button_align_right {
+    text-align: right; }
+
+body#tinymce.wp-editor {
+  /**
+   * Editor only div-like styling
+   */
+  /**
+   * Default styles
+   */
+  /**
+   * Row alignment
+   */
+  /**
+   * Don't show drag handlers for our tables
+   */
+  /**
+   * Move cursor for our columns
+   */
+  /**
+   * Toolbar separator
+   */
+  /**
+   * Make sure images don't make the columns wider
+   */ }
+  body#tinymce.wp-editor .pbsandwich_column td {
+    vertical-align: top;
+    padding: 10px 10px;
+    border: none;
+    border-color: transparent;
+    box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.1); }
+    body#tinymce.wp-editor .pbsandwich_column td .pbsandwich_column td {
+      box-shadow: inset 0 0 0 4px rgba(0, 0, 0, 0.1); }
+      body#tinymce.wp-editor .pbsandwich_column td .pbsandwich_column td .pbsandwich_column td {
+        box-shadow: inset 0 0 0 6px rgba(0, 0, 0, 0.1); }
+  body#tinymce.wp-editor .pbsandwich_column {
+    margin: 10px 0 20px;
+    table-layout: fixed;
+    width: 100%;
+    clear: both; }
+    body#tinymce.wp-editor .pbsandwich_column > tbody > tr > td {
+      min-width: 150px; }
+  body#tinymce.wp-editor .pbsandwich_column.pbs-align-left {
+    width: auto !important;
+    margin-right: auto !important;
+    margin-left: 0 !important; }
+  body#tinymce.wp-editor .pbsandwich_column.pbs-align-right {
+    width: auto !important;
+    margin-right: 0 !important;
+    margin-left: auto !important; }
+  body#tinymce.wp-editor .pbsandwich_column.pbs-align-center {
+    width: auto !important;
+    margin-right: auto !important;
+    margin-left: auto !important; }
+  body#tinymce.wp-editor .pbsandwich_column.pbs-align-left > tbody > tr > td, body#tinymce.wp-editor .pbsandwich_column.pbs-align-right > tbody > tr > td, body#tinymce.wp-editor .pbsandwich_column.pbs-align-center > tbody > tr > td {
+    width: auto !important; }
+  body#tinymce.wp-editor .pbsandwich_column[data-mce-selected="1"] ~ .mce-resizehandle, body#tinymce.wp-editor.pbsandwich_column_selected .mce-resizehandle {
+    display: none !important; }
+  body#tinymce.wp-editor .pbsandwich_column td:hover,
+  body#tinymce.wp-editor .pbsandwich_column td td:hover {
+    cursor: move; }
+  body#tinymce.wp-editor .pbsandwich_column td *:not(.wpview-wrap) {
+    cursor: text; }
+  body#tinymce.wp-editor #wp-column-toolbar .sep {
+    display: inline-block;
+    width: 1px;
+    height: 16px;
+    margin: 5px;
+    padding: 2px 0;
+    vertical-align: top;
+    background: #ccc; }
+  body#tinymce.wp-editor .pbsandwich_column td img {
+    max-width: 100%;
+    height: auto; }
+
+body#tinymce.wp-editor {
+  /**
+   * HTML5 Videos
+   */ }
+  body#tinymce.wp-editor .sandwich .html5video {
+    width: 100%;
+    height: auto; }
+
+/**
+ * Jetpack Videos
+ */
+body#tinymce.wp-editor .jetpack-video-wrapper iframe {
+  max-width: 100%;
+  width: 100%;
+  height: 518px; }
+
+body#tinymce.wp-editor .pbsandwich_column .jetpack-video-wrapper iframe {
+  height: 300px; }
+
+body#tinymce.wp-editor .pbsandwich_column .pbsandwich_column .jetpack-video-wrapper iframe {
+  height: 200px; }
+
+/**
+ * Jetpack Contact Form
+ */
+.contact-form .clear-form {
+  clear: both; }
+
+.contact-form input[type='text'], .contact-form input[type='email'] {
+  width: 300px;
+  max-width: 98%;
+  margin-bottom: 13px; }
+
+.contact-form select {
+  margin-bottom: 13px; }
+
+.contact-form textarea {
+  height: 200px;
+  width: 80%;
+  float: none;
+  margin-bottom: 13px; }
+
+.contact-form input[type='radio'], .contact-form input[type='checkbox'] {
+  float: none;
+  margin-bottom: 13px; }
+
+.contact-form label {
+  margin-bottom: 3px;
+  float: none;
+  font-weight: bold;
+  display: block; }
+
+.contact-form label.checkbox, .contact-form label.radio {
+  margin-bottom: 3px;
+  float: none;
+  font-weight: bold;
+  display: inline-block; }
+
+.contact-form label span {
+  color: #AAA;
+  margin-left: 4px;
+  font-weight: normal; }
+
+.form-errors .form-error-message {
+  color: red; }
+
+.textwidget .contact-form input[type='text'], .textwidget .contact-form input[type='email'], .textwidget .contact-form textarea {
+  width: 250px;
+  max-width: 100%;
+  box-sizing: border-box; }
+
+/**
+ * Jetpack Facbeook Like Box
+ */
+body#tinymce.wp-editor .sandwich .widget_facebook_likebox iframe {
+  width: 100% !important; }
+
+/**
+ * Jetpack Googlemaps
+ */
+body#tinymce.wp-editor .sandwich .googlemaps * {
+  display: none; }
+body#tinymce.wp-editor .sandwich .googlemaps iframe {
+  display: block; }
+
+/**
+ * Hide mailchimp secret input field
+ */
+body#tinymce.wp-editor [name="_mc4wp_required_but_not_really"] {
+  display: none; }
+
+/**
+ * Styles for the main page builder core
+ */
+/**
+ * Drag placeholder
+ */
+body#tinymce.wp-editor .sortable-placeholder {
+  display: block;
+  height: 20px;
+  width: auto;
+  background: rgba(108, 122, 137, 0.25);
+  border-radius: 3px;
+  position: relative;
+  margin: 10px 0; }
+
+body#tinymce.wp-editor .sortable-placeholder:before {
+  position: absolute;
+  content: "\f316";
+  font-size: 20px;
+  font-family: dashicons;
+  color: #6c7a89;
+  display: block;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -o-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%); }
+
+/**
+ * Move cursor and hover color for shortcake & views
+ */
+body#tinymce.wp-editor .wpview-wrap:hover {
+  background: rgba(222, 226, 228, 0.5); }
+
+body#tinymce.wp-editor .wpview-wrap, body#tinymce.wp-editor .wpview-wrap * {
+  cursor: move !important; }
+
+/**
+ * Toolbar styles, most of these are from the default WordPress styles
+ */
+body#tinymce.wp-editor #wp-column-toolbar {
+  position: absolute;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -o-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%); }
+
+body#tinymce.wp-editor #wp-column-toolbar .dashicons {
+  margin: 2px;
+  padding: 2px 3px;
+  width: 20px;
+  height: 20px;
+  color: #777;
+  cursor: pointer;
+  font-size: 20px;
+  border: 1px solid transparent;
+  border-radius: 2px; }
+
+body#tinymce.wp-editor #wp-column-toolbar .dashicons:hover {
+  background-color: #fafafa;
+  border-color: #999;
+  color: #222;
+  -webkit-box-shadow: inset 0 1px 0 #fff, 0 1px 0 rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 1px 0 #fff, 0 1px 0 rgba(0, 0, 0, 0.08);
+  outline: none; }
+
+body#tinymce.wp-editor #wp-column-toolbar {
+  z-index: 100;
+  background-color: #f5f5f5;
+  border: 1px solid #aaa;
+  padding: 1px;
+  cursor: default;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin-bottom: 8px;
+  white-space: nowrap; }
+
+/**
+ * Clone buttons added to toolbars cannot be hovered on properly. This fixes the buttons
+ */
+body#tinymce.wp-editor .toolbar .dashicons {
+  position: relative;
+  cursor: pointer !important; }
+
+body#tinymce.wp-editor .toolbar {
+  white-space: nowrap; }
+
+/**
+ * Toolbar labels & separators
+ */
+body#tinymce.wp-editor .toolbar-label {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 10px;
+  vertical-align: middle;
+  opacity: .8;
+  padding: 2px 5px;
+  display: inline-block;
+  line-height: 20px;
+  margin: 2px;
+  pointer-events: none;
+  width: auto;
+  color: #333; }
+
+body#tinymce.wp-editor .sep + .toolbar-label {
+  padding-left: 5px; }
+
+body#tinymce.wp-editor .wpview-wrap .toolbar .dashicons.sep {
+  width: 1px;
+  background: #ccc;
+  border-radius: 0;
+  padding: 0;
+  border: 0;
+  margin: 5px;
+  pointer-events: none; }
+
+/**
+ * Hide the toolbars when dragging
+ */
+body#tinymce.wp-editor .ui-sortable-helper .toolbar {
+  display: none !important; }
+
+.mce-content-body img[data-mce-selected] {
+  outline: none !important; }
+
+body#tinymce.wp-editor {
+  /**
+   * Toggle shortcode
+   */ }
+  body#tinymce.wp-editor .sandwich .toggle [data-toggle="collapse"] {
+    display: block;
+    text-decoration: none; }
+  body#tinymce.wp-editor .sandwich .toggle [data-toggle="collapse"].collapsed:before,
+  body#tinymce.wp-editor .sandwich .toggle [data-toggle="collapse"][aria-expanded="false"]:before {
+    content: "\f132"; }
+  body#tinymce.wp-editor .sandwich .toggle [data-toggle="collapse"]:before {
+    content: "\f460";
+    font-family: 'Dashicons';
+    vertical-align: middle;
+    margin-right: 10px; }
+  body#tinymce.wp-editor .sandwich .toggle .panel-body > div > p:last-of-type {
+    margin-bottom: 0; }
+
+body#tinymce.wp-editor {
+  /**
+   * Widget Titles
+   */ }
+  body#tinymce.wp-editor .sandwich.hide_title .widgettitle {
+    display: none; }
+
+.dashicons-calendar:before {
+  font-family: 'em_dashicons' !important;
+  content: '\e600'; }
+
+form#event-form h3, form#event-form .inside {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
